@@ -1165,11 +1165,11 @@ MonoBehaviour:
     prefab: {fileID: 6609229090503207969, guid: 89b16ef5c6bfea04da200496573bedd8, type: 3}
   - inputName: Vertical
     inputType: 1
-    axisDirection: -1
+    axisDirection: 1
     prefab: {fileID: 4754665681189514913, guid: 6cac843f0ea83cd46b7a2a1003492781, type: 3}
   - inputName: Vertical
     inputType: 1
-    axisDirection: 1
+    axisDirection: -1
     prefab: {fileID: 7093433686502195972, guid: 1480e6c3a0057bb4db564a88fcf27306, type: 3}
   randoInput:
   - {fileID: 4182010442509735258, guid: 2b01f28c080fd30479460f5f198b2894, type: 3}

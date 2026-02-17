@@ -177,6 +177,7 @@ public class CopyInput : MonoBehaviour
 
     }
 
+    //Function to Randomly choose 5 inputs
     void SpawnRandomInput()
     {
         timerActive = true;
@@ -208,6 +209,7 @@ public class CopyInput : MonoBehaviour
         }
     }
 
+    //Function to check if the player has picked the right button
     void CheckInput(InputButtonData pressed)
     {
 
