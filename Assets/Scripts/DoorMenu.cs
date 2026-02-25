@@ -5,17 +5,17 @@ public class DoorMenu : MonoBehaviour
 {
     public void Door1()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex * 2);
+        SceneManager.LoadScene(5);
     }
 
     public void Door2()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex * 3);
+        SceneManager.LoadScene(6);
     }
 
     public void Door3()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex * 4);
+        SceneManager.LoadScene(7);
     }
 
 }

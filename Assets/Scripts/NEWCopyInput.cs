@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NEWCopyInput : MonoBehaviour
 {
@@ -69,11 +70,10 @@ public class NEWCopyInput : MonoBehaviour
 
     void Update()
     {
-        // PREVIEW PHASE (no input allowed)
         if (showingPreview || gameDone)
             return;
 
-        // TIMER
+        
         if (timerActive)
         {
             timer -= Time.deltaTime;
@@ -89,6 +89,9 @@ public class NEWCopyInput : MonoBehaviour
 
                 if (explosion != null)
                     Instantiate(explosion, ExplosionSpawn.position, ExplosionSpawn.rotation);
+
+                StartCoroutine(EndGame());
+
             }
         }
 
@@ -100,7 +103,6 @@ public class NEWCopyInput : MonoBehaviour
 
                 float lastValue = button.inputName == "Horizontal" ? lastHorizontal : lastVertical;
 
-                // Detect new directional press
                 if (Mathf.Sign(axisValue) == button.axisDirection && Mathf.Abs(axisValue) > 0.5f && lastValue == 0)
                 {
                     CheckInput(button);
@@ -115,21 +117,17 @@ public class NEWCopyInput : MonoBehaviour
 
     void SpawnRandomDirection()
     {
-        // Clear previous
         if (currentSpawn != null)
         {
             Destroy(currentSpawn);
         }
 
-        // Pick random arrow prefab
         GameObject button = randoInput[Random.Range(0, randoInput.Length)];
 
-        // Spawn it at first spawn point
         currentSpawn = Instantiate(button, previewSpawn.position, button.transform.rotation);
 
         currentSpawn.SetActive(true);
 
-        // Find matching InputButtonData
         foreach (InputButtonData data in inputButtons)
         {
             if (data != null &&
@@ -183,13 +181,13 @@ public class NEWCopyInput : MonoBehaviour
             if (currentRound >= totalRounds)
             {
 
-                //Instantiate(checkmark, feedbackSpawn.position, feedbackSpawn.rotation);
-
                 if (confettiOne != null)
                     Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
 
                 if (confettiTwo != null)
                     Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
+
+                StartCoroutine(EndGame());
             }
             else
             {
@@ -200,10 +198,9 @@ public class NEWCopyInput : MonoBehaviour
         {
             wrongText.gameObject.SetActive(true);
 
-            //Instantiate(cross, feedbackSpawn.position, feedbackSpawn.rotation);
-
             if (explosion != null)
                 Instantiate(explosion, ExplosionSpawn.position, ExplosionSpawn.rotation);
+            StartCoroutine(EndGame());
         }
     }
 
@@ -222,4 +219,12 @@ public class NEWCopyInput : MonoBehaviour
 
         SpawnRandomDirection();
     }
+        
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(delayBetweenRounds);
+
+        SceneManager.LoadScene(1);
+    }
+
 }
