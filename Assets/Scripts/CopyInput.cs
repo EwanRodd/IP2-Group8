@@ -87,6 +87,8 @@ public class CopyInput : MonoBehaviour
     void Update()
     {
         //DPad();
+
+        //Check to see if the timer is still going, if not, stop it at 0
         if (timerActive)
         {
             timer -= Time.deltaTime;
@@ -95,6 +97,7 @@ public class CopyInput : MonoBehaviour
 
             timerText.text = timer.ToString("F1");
 
+            //Check to see if the timer has reached zero, if so, stop the game
             if (timer <= 0f)
             {
                 timerActive = false;
@@ -107,9 +110,11 @@ public class CopyInput : MonoBehaviour
             }
         }
 
+        //Check to see if the game is done
         if (gameDone)
             return;
 
+        //Assign each button (A, B, X, Y) so it can be properly checked later in the code, and so it can be read properly
         foreach (InputButtonData button in inputButtons)
         {
             if (button.inputType == InputType.Button)
@@ -121,6 +126,7 @@ public class CopyInput : MonoBehaviour
                 }
             }
 
+            //Assign each direction on the DPad properly and so it can be read by the code correctly
             else if (button.inputType == InputType.Direction)
             {
                 float axisValue = Input.GetAxisRaw(button.inputName);
@@ -185,6 +191,7 @@ public class CopyInput : MonoBehaviour
         correctOrder = new InputButtonData[randoSpawns.Length];
         currentIndex = 0;
 
+        //Randomly choose 5 buttons to display on screen
         for (int i = 0; i < randoSpawns.Length; i++)
         {
             if (currentSpawns[i] != null)
@@ -194,13 +201,15 @@ public class CopyInput : MonoBehaviour
 
             GameObject button = randoInput[Random.Range(0, randoInput.Length)];
 
+            //Display randomly chosen buttons on screen
             currentSpawns[i] = Instantiate(button, randoSpawns[i].position, randoSpawns[i].rotation);
             
             currentSpawns[i].SetActive(true);
 
+            //Create an array full of the correct buttons
             foreach (InputButtonData data in inputButtons)
             {
-                if (data != null && data.prefab == button)
+                if (data != null && data.prefab.name == button.name.Replace("(Clone)", ""))
                 {
                     correctOrder[i] = data;
                     break;
@@ -212,24 +221,29 @@ public class CopyInput : MonoBehaviour
     //Function to check if the player has picked the right button
     void CheckInput(InputButtonData pressed)
     {
-
+        //Assign a bool to either be true or false depending on if the player is correct or not
         bool correct = pressed == correctOrder[currentIndex];
 
-
         Transform answerPos = AnswerSpawns[currentIndex];
+
+        //Create a new prefab that while be assinged to a symbol depending on if the player is correct or not
         GameObject answerPrefab = correct ? checkmark : cross;
 
+        //Place this new symbol in the position of the shown button
         Instantiate(answerPrefab, answerPos.position, answerPos.rotation);
 
+        //Check to see if the player is correct
         if (correct)
         {
+            //Check to see if the player has pressed the correct button
             if (pressed == correctOrder[currentIndex])
             {
                 currentIndex++;
 
+                //Check to see if the player has won or not
                 if (currentIndex >= correctOrder.Length)
                 {
-
+                    //If the player has won, stop the game and play confetti
                     if (confettiOne != null)
                         Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
 
@@ -243,8 +257,10 @@ public class CopyInput : MonoBehaviour
 
         }
 
+        //Check to see if the player was incorrect
         if (!correct)
         {
+            //If the player is incorrect, stop the game
             Debug.Log("Wrong input!");
             wrongButton.gameObject.SetActive(true);
 

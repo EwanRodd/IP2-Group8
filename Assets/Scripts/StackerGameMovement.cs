@@ -16,13 +16,13 @@ public class StackerGameMovement : MonoBehaviour
     [SerializeField] private float rightLimit = 5f;
 
     private int direction = 1;
-    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] public float moveSpeed = 1f;
 
     private Vector2 bounceDirection = Vector2.right;
 
     private StackerGameManager spawner;
 
-    [SerializeField] private float requiredFirstBlockX = 0f;  
+    [SerializeField] private float requiredFirstBlockX = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +33,8 @@ public class StackerGameMovement : MonoBehaviour
     }
     void Update()
     {
+
+        Debug.Log(moveSpeed);
         if (!isMoving)
         {
             transform.position += Vector3.right * direction * moveSpeed * Time.deltaTime;
@@ -109,7 +111,7 @@ public class StackerGameMovement : MonoBehaviour
         {
             return transform.position.x == requiredFirstBlockX;
         }
-            
+
 
         float distance = Mathf.Abs(transform.position.x - previousStack.transform.position.x);
 

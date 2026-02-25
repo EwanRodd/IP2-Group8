@@ -768,9 +768,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac3289ce6b994a047856fd6bd75d215c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stackPrefab: {fileID: 8496492025659403854, guid: 3965d6096a7de904884ecd9d62eaba98, type: 3}
+  stackPrefab: {fileID: 4933440563417216210, guid: 81f93db56f2e5cc428a03c2ac2c2e9e3, type: 3}
   maxStacks: 5
-  yOffset: 1.1
+  yOffset: 1.5
   currentStacks: 0
   currentHeight: -4
   stackEffectPrefab: {fileID: 9027580114871815600, guid: 38165e303ba140e47aa16b136ce233b6, type: 3}

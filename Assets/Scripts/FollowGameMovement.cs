@@ -9,7 +9,7 @@ public class FollowGameMovement : MonoBehaviour
     public float speed = 5f;
 
     public FollowGameTarget target;
-    public float graceTime = 0.3f;
+    public float graceTime = 0.8f;
 
     float timer;
     public float winTimer = 10f;
@@ -40,9 +40,11 @@ public class FollowGameMovement : MonoBehaviour
 
         Vector3 movement = new Vector3(moveX, moveY, 0f);
 
+        //Check to see if the game is done or not
         if (gameDone)
             return;
 
+        //Check to see if the timer is still running
         if (winTimerActive)
         {
             winTimer -= Time.deltaTime;
@@ -51,6 +53,7 @@ public class FollowGameMovement : MonoBehaviour
 
             timerText.text = winTimer.ToString("F1");
 
+            //Check to see if the player has lasted long enough, if so, stop the game and display confetti
             if (winTimer <= 0f)
             {
                 if (confettiOne != null)
@@ -61,23 +64,26 @@ public class FollowGameMovement : MonoBehaviour
 
                 winTimerActive = false;
                 gameDone = true;
-                Debug.Log("Time's up!");
+                Debug.Log("Win!");
             }
         }
         transform.Translate(movement * speed * Time.deltaTime);
 
         float distance = Vector2.Distance(transform.position,target.transform.position);
 
+        //Check if the player is inside the target
         if (distance <= target.circleRadius)
         {
             timer = 0f;
             warning.gameObject.SetActive(false);
         }
+        //Check if the player is outside the circle, if so, start the grace time and display a warning
         else
         {
             timer += Time.deltaTime;
             warning.gameObject.SetActive(true);
 
+            //Check to see if the player has exceded their grace time and lost
             if (timer >= graceTime)
             {
                 PlayerFailed();
@@ -85,6 +91,7 @@ public class FollowGameMovement : MonoBehaviour
         }
     }
 
+    //Function to stop the game
     void PlayerFailed()
     {
         gameDone = true;
