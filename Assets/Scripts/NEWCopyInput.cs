@@ -58,6 +58,10 @@ public class NEWCopyInput : MonoBehaviour
     public int totalRounds = 3;
     private int currentRound = 0;
 
+    [SerializeField] private AudioClip crowdCheer;
+    [SerializeField] private AudioClip crowdBoo;
+    [SerializeField] private AudioClip pop;
+
     private InputButtonData currentCorrectButton;
 
     void Start()
@@ -89,6 +93,7 @@ public class NEWCopyInput : MonoBehaviour
 
                 if (explosion != null)
                     Instantiate(explosion, ExplosionSpawn.position, ExplosionSpawn.rotation);
+                SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.1f);
 
                 StartCoroutine(EndGame());
 
@@ -187,6 +192,8 @@ public class NEWCopyInput : MonoBehaviour
                 if (confettiTwo != null)
                     Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
+                SFXManager.instance.PopClip(pop, transform, 0.1f);
+                SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.2f);
                 StartCoroutine(EndGame());
             }
             else
@@ -196,10 +203,14 @@ public class NEWCopyInput : MonoBehaviour
         }
         else
         {
+            inputPhase = false;
+            timerActive = false;
+
             wrongText.gameObject.SetActive(true);
 
             if (explosion != null)
                 Instantiate(explosion, ExplosionSpawn.position, ExplosionSpawn.rotation);
+            SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.1f);
             StartCoroutine(EndGame());
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StackerGameMovement : MonoBehaviour
 {
@@ -20,9 +21,15 @@ public class StackerGameMovement : MonoBehaviour
 
     private Vector2 bounceDirection = Vector2.right;
 
+    [SerializeField] private AudioClip crowdCheer;
+    [SerializeField] private AudioClip crowdBoo;
+    [SerializeField] private AudioClip pop;
+
     private StackerGameManager spawner;
 
     [SerializeField] private float requiredFirstBlockX = 0f;
+
+    private int delay = 3;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,7 +62,8 @@ public class StackerGameMovement : MonoBehaviour
             if (!IsAligned())
             {
                 Debug.Log("Game Over!");
-                enabled = false;
+                SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.1f);
+                StartCoroutine(EndGame());
                 return;
             }
 
@@ -68,6 +76,10 @@ public class StackerGameMovement : MonoBehaviour
                     Instantiate(spawner.confettiTwo, spawner.confettiSpawns[1].position, spawner.confettiSpawns[1].rotation);
 
                 enabled = true;
+
+                SFXManager.instance.PopClip(pop, transform, 0.1f);
+                SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.2f);
+                StartCoroutine(EndGame());
                 return;
             }
 
@@ -131,6 +143,13 @@ public class StackerGameMovement : MonoBehaviour
 
         GameObject effect = Instantiate(spawner.stackEffectPrefab, spawnPosition, Quaternion.identity);
 
+    }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(delay);
+
+        SceneManager.LoadScene(1);
     }
 
 }

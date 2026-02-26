@@ -27,6 +27,16 @@ public class CupGameManager : MonoBehaviour
 
     private int swapCount = 5;
     private float swapDuration = 0.5f;
+    private int delay = 3;
+
+    [Header("Confetti")]
+    public Transform[] confettiSpawns;
+    public GameObject confettiOne;
+    public GameObject confettiTwo;
+
+    [SerializeField] private AudioClip crowdCheer;
+    [SerializeField] private AudioClip crowdBoo;
+    [SerializeField] private AudioClip pop;
 
 
 
@@ -82,10 +92,23 @@ public class CupGameManager : MonoBehaviour
         if (correct)
         {
             winText.SetActive(true);
+
+            if (confettiOne != null)
+                Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
+
+            if (confettiTwo != null)
+                Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
+
+            SFXManager.instance.PopClip(pop, transform, 0.1f);
+            SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.2f);
+            StartCoroutine(EndGame());
         }
         else
         {
             failText.SetActive(true);
+            SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.1f);
+
+            StartCoroutine(EndGame());
         }
 
         StartCoroutine(RevealAllAfterDelay(1, clickedCup));
@@ -173,5 +196,12 @@ public class CupGameManager : MonoBehaviour
 
         cupA.transform.position = startB;
         cupB.transform.position = startA;
+    }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(delay);
+
+        SceneManager.LoadScene(1);
     }
 }

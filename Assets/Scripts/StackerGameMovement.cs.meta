@@ -4,7 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - stackEffectPrefab: {instanceID: 0}
+  - crowdCheer: {fileID: 8300000, guid: d73a3df7f1e1bbe47833495f936af39b, type: 3}
+  - crowdBoo: {fileID: 8300000, guid: 029c98ceb38bda949a468c673bd58077, type: 3}
+  - pop: {fileID: 8300000, guid: 212183505e17dae4ea5ab8283604594e, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
