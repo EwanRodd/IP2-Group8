@@ -91,7 +91,7 @@ public class CupGameManager : MonoBehaviour
         
         if (correct)
         {
-            winText.SetActive(true);
+            //winText.SetActive(true);
 
             if (confettiOne != null)
                 Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
@@ -105,7 +105,7 @@ public class CupGameManager : MonoBehaviour
         }
         else
         {
-            failText.SetActive(true);
+            //failText.SetActive(true);
             SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.1f);
 
             StartCoroutine(EndGame());
@@ -138,7 +138,7 @@ public class CupGameManager : MonoBehaviour
 
     private IEnumerator ShuffleRoutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         cupWithBall.PlaceBall(ball);
 

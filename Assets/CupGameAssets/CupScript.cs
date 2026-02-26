@@ -11,6 +11,11 @@ public class Cup : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(Wait1());
+    }
+    private IEnumerator Wait1()
+    {
+        yield return new WaitForSeconds(1f);
         MoveVertical(-moveDistance);
     }
 
