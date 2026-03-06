@@ -99,14 +99,14 @@ public class CupGameManager : MonoBehaviour
             if (confettiTwo != null)
                 Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
-            SFXManager.instance.PopClip(pop, transform, 0.1f);
-            SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.2f);
+            SFXManager.instance.PopClip(pop, transform, 0.5f);
+            SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
             StartCoroutine(EndGame());
         }
         else
         {
             failText.SetActive(true);
-            SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.1f);
+            SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
 
             StartCoroutine(EndGame());
         }

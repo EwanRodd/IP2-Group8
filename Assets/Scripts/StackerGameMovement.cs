@@ -62,7 +62,7 @@ public class StackerGameMovement : MonoBehaviour
             if (!IsAligned())
             {
                 Debug.Log("Game Over!");
-                SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.1f);
+                SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
                 StartCoroutine(EndGame());
                 return;
             }
@@ -77,8 +77,8 @@ public class StackerGameMovement : MonoBehaviour
 
                 enabled = true;
 
-                SFXManager.instance.PopClip(pop, transform, 0.1f);
-                SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.2f);
+                SFXManager.instance.PopClip(pop, transform, 0.5f);
+                SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
                 StartCoroutine(EndGame());
                 return;
             }
