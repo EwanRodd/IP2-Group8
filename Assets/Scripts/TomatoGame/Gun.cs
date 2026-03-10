@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public float range = 100f
+
 
 public class Gun : MonoBehaviour
 {
+    public float range = 100f;
 
 
-    // Update is called once per frame
     void Update()
     {
         // For testing change to controller 
