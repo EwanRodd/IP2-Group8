@@ -1,0 +1,39 @@
+using UnityEngine;
+
+public class PlayerDodgem : MonoBehaviour
+{
+    public float speed = 8f;
+    public float turnSpeed = 200f;
+
+    float moveInput;
+    float turnInput;
+
+    Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Update()
+    {
+        moveInput = Input.GetAxis("Vertical");
+        turnInput = Input.GetAxis("Horizontal");
+    }
+
+    void FixedUpdate()
+    {
+        rb.MoveRotation(rb.rotation - turnInput * turnSpeed * Time.fixedDeltaTime);
+
+        Vector2 movement = transform.up * moveInput * speed;
+        rb.AddForce(movement);
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("EnemyDodgem"))
+        {
+            Debug.Log("Player hit!");
+            // trigger fail / lose health / end minigame
+        }
+    }
+}
