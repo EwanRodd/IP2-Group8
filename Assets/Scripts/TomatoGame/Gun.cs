@@ -15,7 +15,11 @@ public class Gun : MonoBehaviour
 
     void Fire()
     {
-        Raycast2D hit = Physics2D.Raycast(transform.position, transform.right, range);
+        // debugging ray
+        Debug.DrawRay(transform.position, transform.right * range, Color.red);
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, range);
+        
         if(hit.collider != null){
             Destroy(hit.collider.gameObject);
             Debug.Log("HITTT");
