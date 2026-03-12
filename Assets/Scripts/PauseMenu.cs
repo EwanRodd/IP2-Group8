@@ -7,9 +7,11 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] GameObject PauseScreen;
     public static PauseMenu menu;
-
+    public bool isPaused;
     private void Start()
     {
+        isPaused = false;
+
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             Debug.Log("Destroyed");
@@ -45,11 +47,20 @@ public class PauseMenu : MonoBehaviour
     }
     public void Update()
     {
-        if (Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause") && isPaused == false)
         {
+            isPaused = true;
             Debug.Log("PAUSED");
             PauseScreen.SetActive(true);
             Time.timeScale = 0;
+        }
+
+        else if (Input.GetButtonDown("Pause") && isPaused == true)
+        {
+            isPaused = false;
+            Debug.Log("UNPAUSED");
+            PauseScreen.SetActive(false);
+            Time.timeScale = 1;
         }
     }
     
