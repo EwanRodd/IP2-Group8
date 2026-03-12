@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/CupGame.unity
     guid: 72dccaa3d93a5eb438336b200103277a
   - enabled: 1
-    path: Assets/Scenes/Door Scene.unity
+    path: Assets/Scenes/TransitionScene.unity
     guid: 0affbe57a3afb704f93f86fcdaa579ce
   - enabled: 1
     path: Assets/Scenes/CopyInputGame.unity
