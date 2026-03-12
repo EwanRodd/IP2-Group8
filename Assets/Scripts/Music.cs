@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Music : MonoBehaviour
 {
@@ -8,19 +9,40 @@ public class Music : MonoBehaviour
     public static Music music;
     void Start()
     {
-        if(music != null)
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Debug.Log("Destroyed");
+            Destroy(gameObject);
+            return;
+        }
+        if (music != null && music != this)
         {
             Destroy(gameObject);
+            return;
         }
-        else
-        {
-            music = this;
-        }
-        DontDestroyOnLoad(this.gameObject);
+        music = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += SceneLoaded;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= SceneLoaded;
+    }
+
+    void SceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex == 0)
+        {
+            Debug.Log("Destroying music for menu");
+            Destroy(gameObject);
+        }
+    }
+        // Update is called once per frame
+        void Update()
     {
         
     }

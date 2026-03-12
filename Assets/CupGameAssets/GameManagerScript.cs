@@ -202,6 +202,6 @@ public class CupGameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 }

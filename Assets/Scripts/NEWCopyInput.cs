@@ -235,7 +235,7 @@ public class NEWCopyInput : MonoBehaviour
     {
         yield return new WaitForSeconds(delayBetweenRounds);
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
 }
