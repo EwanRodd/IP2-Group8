@@ -6,7 +6,43 @@ public class PauseMenu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     [SerializeField] GameObject PauseScreen;
+    public static PauseMenu menu;
 
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            Debug.Log("Destroyed");
+            Destroy(gameObject);
+            return;
+        }
+        if (menu != null && menu != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        menu = this;
+        DontDestroyOnLoad(gameObject);
+
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += SceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= SceneLoaded;
+    }
+
+    void SceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
     public void Update()
     {
         if (Input.GetButtonDown("Pause"))

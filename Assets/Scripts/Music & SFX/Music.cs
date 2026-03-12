@@ -37,7 +37,6 @@ public class Music : MonoBehaviour
     {
         if (scene.buildIndex == 0)
         {
-            Debug.Log("Destroying music for menu");
             Destroy(gameObject);
         }
     }
