@@ -5,15 +5,17 @@ TagManager:
   serializedVersion: 3
   tags:
   - Boundary
+  - PlayerBoundary
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - PlayerBoundary
   - 
   - 
   - 
