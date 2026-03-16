@@ -40,6 +40,8 @@ public class NEWCopyInput : MonoBehaviour
     [Header("UI")]
     public TMP_Text timeUpText;
     public TMP_Text wrongText;
+    public TMP_Text introText;
+    public Animator openingText;
 
     [Header("Timer Settings")]
     public float previewDuration = 3f;
@@ -58,6 +60,10 @@ public class NEWCopyInput : MonoBehaviour
     public int totalRounds = 3;
     private int currentRound = 0;
 
+    [Header("Curtain")]
+    public Animator Curtain;
+ 
+    [Header("Sound Effects")]
     [SerializeField] private AudioClip crowdCheer;
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
@@ -66,14 +72,16 @@ public class NEWCopyInput : MonoBehaviour
 
     void Start()
     {
+        introText.gameObject.SetActive(false);
         timeUpText.gameObject.SetActive(false);
         wrongText.gameObject.SetActive(false);
 
-        SpawnRandomDirection();
+        StartCoroutine(GameStartDelay());
     }
 
     void Update()
     {
+
         if (showingPreview || gameDone)
             return;
 
@@ -122,6 +130,7 @@ public class NEWCopyInput : MonoBehaviour
 
     void SpawnRandomDirection()
     {
+       
         if (currentSpawn != null)
         {
             Destroy(currentSpawn);
@@ -129,14 +138,9 @@ public class NEWCopyInput : MonoBehaviour
 
         GameObject button = randoInput[Random.Range(0, randoInput.Length)];
 
-        currentSpawn = Instantiate(button, previewSpawn.position, button.transform.rotation);
-
-        currentSpawn.SetActive(true);
-
         foreach (InputButtonData data in inputButtons)
         {
-            if (data != null &&
-                data.arrow.name == button.name.Replace("(Clone)", ""))
+            if (data != null && data.arrow.name == button.name.Replace("(Clone)", ""))
             {
                 currentCorrectButton = data;
                 break;
@@ -150,15 +154,23 @@ public class NEWCopyInput : MonoBehaviour
 
     IEnumerator PreviewRoutine()
     {
+
+        Curtain.ResetTrigger("Open");
+        Curtain.SetTrigger("Close");
+
         yield return new WaitForSeconds(previewDuration);
 
-        if (currentSpawn != null)
+        Curtain.ResetTrigger("Close");
+        Curtain.SetTrigger("Open");
 
-            Destroy(currentSpawn);
-
+        yield return new WaitForSeconds(0.5f);
         showingPreview = false;
 
+
         currentSpawn = Instantiate(currentCorrectButton.timerPrefab, previewSpawn.position, currentCorrectButton.timerPrefab.transform.rotation);
+
+        currentSpawn.SetActive(true);
+
 
         timer = timeLimit;
         timerActive = true;
@@ -215,8 +227,26 @@ public class NEWCopyInput : MonoBehaviour
         }
     }
 
+    IEnumerator GameStartDelay()
+    {
+        introText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        openingText.SetTrigger("Out");
+
+        yield return new WaitForSeconds(1f);
+        introText.gameObject.SetActive(false);
+
+        SpawnRandomDirection();
+    }
+
     IEnumerator NextRoundDelay()
     {
+        yield return new WaitForSeconds(2f);
+
+        Curtain.ResetTrigger("Open");
+        Curtain.SetTrigger("Close");
 
         yield return new WaitForSeconds(delayBetweenRounds);
 
@@ -224,16 +254,12 @@ public class NEWCopyInput : MonoBehaviour
 
             Destroy(currentSpawn);
 
-        timer = timeLimit;
-        timerActive = true;
-        inputPhase = true;
-
         SpawnRandomDirection();
     }
         
     IEnumerator EndGame()
     {
-        yield return new WaitForSeconds(delayBetweenRounds);
+        yield return new WaitForSeconds(2.8f);
 
         SceneManager.LoadScene(2);
     }
