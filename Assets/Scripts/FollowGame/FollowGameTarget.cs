@@ -1,5 +1,8 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
 
 public class FollowGameTarget : MonoBehaviour
 {
@@ -9,29 +12,46 @@ public class FollowGameTarget : MonoBehaviour
 
     public FollowGameMovement player;
 
+    public bool gameStarted;
+
     Vector3 targetPosition;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //Call function to choose the targets position
-        PickNewTarget();
+        //Call function to start game delay
+        StartCoroutine(GameStartDelay());
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameStarted)
+        {
+            PlayGame();
+        }
+    }
+
+    void PlayGame()
+    {
         //Check to see if the game is still going
         if (player.gameDone)
             return;
-        
+
         //Change the targets position to the new location
-        transform.position = Vector3.MoveTowards(transform.position,targetPosition,moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
         //Ensure the change of location is big enough
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
             PickNewTarget();
         }
+    }
+
+    IEnumerator GameStartDelay()
+    {
+        yield return new WaitForSeconds(5f);
+
+        gameStarted = true;
     }
 
     //Function for the target to choose its next position

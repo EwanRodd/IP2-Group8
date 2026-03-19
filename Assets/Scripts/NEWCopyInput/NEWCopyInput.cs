@@ -20,7 +20,11 @@ public class NEWCopyInput : MonoBehaviour
         public GameObject arrow;
         public GameObject successPrefab;
         public GameObject timerPrefab;
+        public GameObject hostPrefab;
+        public GameObject wrongPrefab;
     }
+
+    public GameObject idleHost;
 
     [Header("Directional Input Data")]
     public InputButtonData[] inputButtons;
@@ -31,6 +35,8 @@ public class NEWCopyInput : MonoBehaviour
     private GameObject currentSpawn;
     public Transform[] confettiSpawns;
     public Transform ExplosionSpawn;
+    public Transform hostSpawn;
+    private GameObject theHostSpawn;
 
     [Header("Feedback")]
     public GameObject confettiOne;
@@ -60,8 +66,9 @@ public class NEWCopyInput : MonoBehaviour
     public int totalRounds = 3;
     private int currentRound = 0;
 
-    [Header("Curtain")]
+    [Header("Curtains")]
     public Animator Curtain;
+    public Animator introCurtain;
  
     [Header("Sound Effects")]
     [SerializeField] private AudioClip crowdCheer;
@@ -99,6 +106,11 @@ public class NEWCopyInput : MonoBehaviour
 
                 timeUpText.gameObject.SetActive(true);
 
+                if (currentSpawn != null)
+
+                    Destroy(currentSpawn);
+                    Instantiate(currentCorrectButton.wrongPrefab, previewSpawn.position, currentCorrectButton.wrongPrefab.transform.rotation);
+
                 if (explosion != null)
                     Instantiate(explosion, ExplosionSpawn.position, ExplosionSpawn.rotation);
                 SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
@@ -130,11 +142,15 @@ public class NEWCopyInput : MonoBehaviour
 
     void SpawnRandomDirection()
     {
-       
+
         if (currentSpawn != null)
         {
             Destroy(currentSpawn);
         }
+
+        if (theHostSpawn != null)
+
+            Destroy(theHostSpawn);
 
         GameObject button = randoInput[Random.Range(0, randoInput.Length)];
 
@@ -155,21 +171,29 @@ public class NEWCopyInput : MonoBehaviour
     IEnumerator PreviewRoutine()
     {
 
-        Curtain.ResetTrigger("Open");
-        Curtain.SetTrigger("Close");
+        theHostSpawn = Instantiate(idleHost, hostSpawn.position, idleHost.transform.rotation);
 
+        Curtain.ResetTrigger("Open");
+        Curtain.SetTrigger("Close");        
+        
         yield return new WaitForSeconds(previewDuration);
 
         Curtain.ResetTrigger("Close");
         Curtain.SetTrigger("Open");
 
+        if (theHostSpawn != null)
+
+            Destroy (theHostSpawn);
+
+        theHostSpawn = Instantiate(currentCorrectButton.hostPrefab, hostSpawn.position, currentCorrectButton.hostPrefab.transform.rotation);
+
         yield return new WaitForSeconds(0.5f);
         showingPreview = false;
 
-
-        currentSpawn = Instantiate(currentCorrectButton.timerPrefab, previewSpawn.position, currentCorrectButton.timerPrefab.transform.rotation);
+        currentSpawn = Instantiate(currentCorrectButton.timerPrefab, previewSpawn.position, currentCorrectButton.timerPrefab.transform.rotation);        
 
         currentSpawn.SetActive(true);
+        theHostSpawn.SetActive(true);
 
 
         timer = timeLimit;
@@ -195,6 +219,7 @@ public class NEWCopyInput : MonoBehaviour
 
             currentSpawn = Instantiate(currentCorrectButton.successPrefab, previewSpawn.position, currentCorrectButton.successPrefab.transform.rotation);
 
+
             if (currentRound >= totalRounds)
             {
 
@@ -219,6 +244,11 @@ public class NEWCopyInput : MonoBehaviour
             timerActive = false;
 
             wrongText.gameObject.SetActive(true);
+            if (currentSpawn != null)
+
+                Destroy(currentSpawn);
+
+                Instantiate(currentCorrectButton.wrongPrefab, previewSpawn.position, currentCorrectButton.wrongPrefab.transform.rotation);
 
             if (explosion != null)
                 Instantiate(explosion, ExplosionSpawn.position, ExplosionSpawn.rotation);
@@ -236,6 +266,8 @@ public class NEWCopyInput : MonoBehaviour
         openingText.SetTrigger("Out");
 
         yield return new WaitForSeconds(1f);
+
+        introCurtain.SetTrigger("Starting");
         introText.gameObject.SetActive(false);
 
         SpawnRandomDirection();

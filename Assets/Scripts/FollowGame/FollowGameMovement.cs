@@ -1,6 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEngine.GraphicsBuffer;
 
 public class FollowGameMovement : MonoBehaviour
@@ -14,12 +17,21 @@ public class FollowGameMovement : MonoBehaviour
     float timer;
     public float winTimer = 10f;
     public bool winTimerActive = false;
-    public TMP_Text timerText;
     public TMP_Text warning;
 
     public GameObject confettiOne;
     public GameObject confettiTwo;
     public Transform[] confettiSpawns;
+
+    [SerializeField] private AudioClip crowdCheer;
+    [SerializeField] private AudioClip crowdBoo;
+    [SerializeField] private AudioClip pop;
+
+    public TMP_Text introText;
+    public Animator openingText;
+    public Animator introCurtain;
+
+    public bool gameStarted = false;
 
 
     public bool gameDone = false;
@@ -29,11 +41,22 @@ public class FollowGameMovement : MonoBehaviour
         winTimerActive = true;
         winTimer = 10f;
         warning.gameObject.SetActive(false);
+        introText.gameObject.SetActive(false);
+
+        StartCoroutine(GameStartDelay());
     }
 
     // Update is called once per frame
 
     void Update()
+    {
+        if (gameStarted)
+        {
+            PlayGame();
+        }
+    }
+
+    void PlayGame()
     {
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
@@ -51,8 +74,6 @@ public class FollowGameMovement : MonoBehaviour
 
             winTimer = Mathf.Max(winTimer, 0f);
 
-            timerText.text = winTimer.ToString("F1");
-
             //Check to see if the player has lasted long enough, if so, stop the game and display confetti
             if (winTimer <= 0f)
             {
@@ -62,14 +83,17 @@ public class FollowGameMovement : MonoBehaviour
                 if (confettiTwo != null)
                     Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
+                SFXManager.instance.PopClip(pop, transform, 0.5f);
+                SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
+
                 winTimerActive = false;
                 gameDone = true;
-                Debug.Log("Win!");
+                StartCoroutine(EndGame());
             }
         }
         transform.Translate(movement * speed * Time.deltaTime);
 
-        float distance = Vector2.Distance(transform.position,target.transform.position);
+        float distance = Vector2.Distance(transform.position, target.transform.position);
 
         //Check if the player is inside the target
         if (distance <= target.circleRadius)
@@ -91,10 +115,36 @@ public class FollowGameMovement : MonoBehaviour
         }
     }
 
+    IEnumerator GameStartDelay()
+    {
+        introText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        openingText.SetTrigger("Out");
+        yield return new WaitForSeconds(1f);
+
+        introCurtain.SetTrigger("Starting");
+
+        yield return new WaitForSeconds(1f);
+        introText.gameObject.SetActive(false);
+
+        gameStarted = true;
+    }
+
     //Function to stop the game
     void PlayerFailed()
     {
+        SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
         gameDone = true;
-        Debug.Log("Game Over");
+        StartCoroutine(EndGame());
     }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(2.8f);
+
+        SceneManager.LoadScene(2);
+    }
+
 }
