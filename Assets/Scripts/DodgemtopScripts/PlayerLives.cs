@@ -1,20 +1,15 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerLives : MonoBehaviour
 {
     public int lives;
     public Image[] livesUI;
-    void Start()
-    {
-        
-    }
-    
-    void Update()
-    {
-        
-    }
-
+    private int delay = 3;
+    public GameObject winText;
+    public GameObject failText;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         print(collision.gameObject.name);
@@ -37,8 +32,19 @@ public class PlayerLives : MonoBehaviour
           if (lives <= 0)
           {
             Destroy(gameObject);
+            StartCoroutine(EndGame());
+
           }
            
         }
     }
+
+    private IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(delay);
+
+        SceneManager.LoadScene(2);
+    }
+
+
 }
