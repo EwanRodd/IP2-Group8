@@ -30,7 +30,7 @@ public class PlayerDodgem : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("EnemyDodgem"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("Player hit!");
             // trigger fail / lose health / end minigame

@@ -22,8 +22,25 @@ public class EnemyDodgem : MonoBehaviour
     void FixedUpdate()
     {
         MoveTowardsTarget();
+        /*if (rb.linearVelocity.magnitude < 0.1f)
+        {
+            PickNewTarget();
+            rb.AddForce(Random.insideUnitCircle * 3f, ForceMode2D.Impulse);
+        }*/
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
+        {
+            // Pick a new direction so we don't keep pushing
+            PickNewTarget();
+
+            // Push away from collision
+            Vector2 away = (transform.position - collision.transform.position).normalized;
+            rb.AddForce(away * 5f, ForceMode2D.Impulse);
+        }
+    }
     void PickNewTarget()
     {
         target = new Vector2(
