@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
     void Update()
     {
         // For testing change to controller 
-        PcMode();
+        Pc_LeftMouseButtonDown();
     }
 
     void Fire()
@@ -25,8 +25,12 @@ public class Gun : MonoBehaviour
             Debug.Log("HITTT");
         }
     }
-
-    void PcMode()
+    void Controller_OnFireButtonDown()
+    {
+        
+        
+    }
+    void Pc_LeftMouseButtonDown()
     {
         if (Input.GetMouseButtonDown(0))
         {
