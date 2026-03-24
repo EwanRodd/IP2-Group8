@@ -27,7 +27,8 @@ public class Gun : MonoBehaviour
     }
     void Controller_OnFireButtonDown()
     {
-        
+        Fire();
+        Debug.Log("right trigger pressed");
         
     }
     void Pc_LeftMouseButtonDown()
