@@ -7,6 +7,7 @@ public class Token : MonoBehaviour
     public Vector2 minBounds;
     public Vector2 maxBounds;
     public float minDistance = 2f;
+    public Manager manager;
 
     void PickNewTarget()
     {
@@ -27,6 +28,7 @@ public class Token : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            manager.AddScore(1);
             PickNewTarget();
             transform.position = target;
         }        
