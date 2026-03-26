@@ -233,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 39241309983483049, guid: c949b4566e9214ebea9fb9240e7902e9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.66
+      value: -0.65999985
       objectReference: {fileID: 0}
     - target: {fileID: 39241309983483049, guid: c949b4566e9214ebea9fb9240e7902e9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -860,9 +860,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2109268993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 19105, guid: 0000000000000000e000000000000000, type: 0}
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: d07c970894a814261991893138ec8bb1, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Base
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &2130622475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -943,6 +961,6 @@ SceneRoots:
   - {fileID: 1140699140}
   - {fileID: 2130622475}
   - {fileID: 971782297}
-  - {fileID: 427692028}
   - {fileID: 305525097}
+  - {fileID: 427692028}
   - {fileID: 2109268996}
