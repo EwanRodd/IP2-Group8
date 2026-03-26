@@ -9,6 +9,7 @@ public class EnemyDodgem : MonoBehaviour
     public Vector2 maxBounds = new Vector2(8, 4);
 
     public float targetReachDistance = 0.5f;
+    public float pushbackForce;
 
     private Rigidbody2D rb;
     private Vector2 target;
@@ -38,7 +39,7 @@ public class EnemyDodgem : MonoBehaviour
 
             // Push away from collision
             Vector2 away = (transform.position - collision.transform.position).normalized;
-            rb.AddForce(away * 5f, ForceMode2D.Impulse);
+            rb.AddForce(away * pushbackForce, ForceMode2D.Impulse);
         }
     }
     void PickNewTarget()

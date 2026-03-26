@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerDodgem : MonoBehaviour
 {
-    public float speed = 8f;
-    public float turnSpeed = 200f;
+    public float speed = 16f;
+    public float turnSpeed = 320f;
     public float pushbackForce;
     public int lives = 3;
 
@@ -25,10 +25,12 @@ public class PlayerDodgem : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MoveRotation(rb.rotation - turnInput * turnSpeed * Time.fixedDeltaTime);
+        float newRotation = rb.rotation - turnInput * turnSpeed;
+        Debug.Log(turnInput);
+        rb.rotation = newRotation; // direct assignment = instant response
 
-        Vector2 movement = transform.up * moveInput * speed;
-        rb.AddForce(movement);
+        Vector2 targetVelocity = transform.up * moveInput * speed;
+        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, 10f * Time.fixedDeltaTime);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {

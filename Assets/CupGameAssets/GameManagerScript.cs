@@ -145,7 +145,11 @@ public class CupGameManager : MonoBehaviour
         for (int i = 0; i < swapCount; i++)
         {
             (Cup a, Cup b) = GetTwoDifferentCups();
+            a.BecomeHand();
+            b.BecomeHand();
             yield return SwapCups(a, b);
+            a.BecomeCup();
+            b.BecomeCup();
         }
 
         ball.SetParent(null);

@@ -3,9 +3,16 @@ using UnityEngine;
 
 public class Cup : MonoBehaviour
 {
+
+    //these should really be prefabs but ehh sunk cost fallacy
+
     public float moveDistance = 2f;
     private float moveSpeed = 3f;
     private bool interactable = false;
+
+    public SpriteRenderer spriteRenderer;
+    public Sprite cupNormal;
+    public Sprite cupHand;
 
     [SerializeField] private CupGameManager gameManager;
 
@@ -38,6 +45,17 @@ public class Cup : MonoBehaviour
         }
     }
 
+
+    public void BecomeHand()
+    {
+        spriteRenderer.sprite = cupHand;
+    }
+
+    public void BecomeCup()
+    {
+        spriteRenderer.sprite = cupNormal;
+    }
+
     public void MoveVertical(float distance)
     {
         Vector3 targetPosition = transform.position + Vector3.up * distance;
@@ -46,6 +64,8 @@ public class Cup : MonoBehaviour
 
     private IEnumerator MoveToPosition(Vector3 target)
     {
+        Debug.Log("moving");
+        //spriteRenderer.sprite = cupHand;
         while (Vector3.Distance(transform.position, target) > 0.01f)
         {
             transform.position = Vector3.MoveTowards(
@@ -58,5 +78,6 @@ public class Cup : MonoBehaviour
         }
 
         transform.position = target;
+        //spriteRenderer.sprite = cupNormal;
     }
 }
