@@ -5,6 +5,8 @@ public class EnemeyMovement : MonoBehaviour
 {
     public float moveSpeed;
     public float vertPosition;
+    
+
     void Start()
     {
         
