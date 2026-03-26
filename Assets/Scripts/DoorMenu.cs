@@ -7,30 +7,88 @@ public class DoorMenu : MonoBehaviour
 {
     static List<int> Games = new List<int> {5,6,7};
 
+    public Animator wheel;
+    public Animator introCurtain;
+
     public void Start()
     {
-        int nextLevel = NextGame();
+        wheel.ResetTrigger("CupGame");
+        wheel.ResetTrigger("CopyGame");
+        wheel.ResetTrigger("StackerGame");
 
-        StartCoroutine(LoadGame(nextLevel));
+        StartCoroutine(CurtainDelay());
     }
-    public int NextGame()
+    public void NextGame()
     {
-        //choose the index of a level:
+
         int nextLevelIndex = Random.Range(0, Games.Count);
-        //get the actual sceneIndex by the index of our list:
+
         int nextLevel = Games[nextLevelIndex];
-        //remove the sceneIndex from the list to make it not appear again:
+ 
         Games.Remove(nextLevel);
         // load the level:
-        return nextLevel;
+        if (nextLevel == 5)
+        {
+            StartCoroutine(CopyGame());
+        }
+        else if (nextLevel == 6)
+        {
+            StartCoroutine(StackerGame());
+        }
+        else if (nextLevel == 7)
+        {
+            StartCoroutine(CupGame());
+        }
     }
 
-    IEnumerator LoadGame(int nextLevel)
+    IEnumerator CurtainDelay()
     {
-        yield return new WaitForSeconds(3);
+        introCurtain.SetTrigger("Starting");
+        introCurtain.ResetTrigger("Ending");
 
-        SceneManager.LoadScene(nextLevel);
+        yield return new WaitForSeconds(3.5f);
+
+        NextGame();
     }
+    IEnumerator CopyGame()
+    {
+        wheel.SetTrigger("CopyGame");
+        yield return new WaitForSeconds(5f);
+
+        introCurtain.ResetTrigger("Starting");
+        introCurtain.SetTrigger("Ending");
+
+        yield return new WaitForSeconds(3.5f);
+
+        SceneManager.LoadScene(5);
+    }
+
+    IEnumerator StackerGame()
+    {
+        wheel.SetTrigger("StackerGame");
+        yield return new WaitForSeconds(5f);
+
+        introCurtain.ResetTrigger("Starting");
+        introCurtain.SetTrigger("Ending");
+
+        yield return new WaitForSeconds(3.5f);
+
+        SceneManager.LoadScene(6);
+    }
+
+    IEnumerator CupGame()
+    {
+        wheel.SetTrigger("CupGame");
+        yield return new WaitForSeconds(5f);
+
+        introCurtain.ResetTrigger("Starting");
+        introCurtain.SetTrigger("Ending");
+
+        yield return new WaitForSeconds(3.5f);
+
+        SceneManager.LoadScene(7);
+    }
+
     public void Door1()
     {
         SceneManager.LoadScene(5);
