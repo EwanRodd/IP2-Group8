@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 
 
-public class Gun : MonoBehaviour
+public class Slingshot : MonoBehaviour
 {
     private PlayerInput playerInput;
 
