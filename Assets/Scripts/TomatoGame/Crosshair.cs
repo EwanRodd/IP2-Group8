@@ -1,12 +1,21 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Crosshair : MonoBehaviour
 {
+    public float controllerSpeed = 10f;
+    private PlayerInput playerInput;
+    private Vector2 lookInput;
+    private Camera cam;
 
     void Awake()
     {
-        Cursor.visible = false;
+        playerInput = new PlayerInput();
 
+        cam = Camera.main;
+
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Confined; 
     }
 
@@ -14,19 +23,47 @@ public class Crosshair : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OnMouseMove();
+        
+        lookInput = playerInput.Player.Aim.ReadValue<Vector2>();
+
+        // To allow testing, will detect if mouse present, allowing for seamless testing
+        // without having to change too much code
+        if(Mouse.current != null && Mouse.current.delta.ReadValue() != Vector2.zero)
+        {
+            UpdateMouse();
+
+        }
+        else
+        {
+            UpdateController();
+        }
+
+
     }
 
-    void OnMouseMove()
+    void UpdateMouse()
     {
-         // gets mouse position from input
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = Mathf.Abs(Camera.main.transform.position.z); 
+        Vector3 mousePos = Mouse.current.position.ReadValue();
+        mousePos.z = Mathf.Abs(cam.transform.position.z);
 
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
+        worldPos.z = -1f;
 
-        mousePosition.z = -1f;
+        transform.position = worldPos;   
+    }
 
-        transform.position = mousePosition;       
+    void UpdateController()
+    {
+        Vector3 movement = new Vector3(lookInput.x, lookInput.y, 0f) * controllerSpeed * Time.deltaTime;
+        transform.position += movement;        
+    }
+
+    void OnEnable()
+    {
+        playerInput.Enable();
+    }
+    void OnDisable()
+    {
+        playerInput.Disable();
     }
 }
