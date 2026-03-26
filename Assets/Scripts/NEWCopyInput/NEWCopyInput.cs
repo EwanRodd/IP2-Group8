@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -74,6 +75,7 @@ public class NEWCopyInput : MonoBehaviour
     [SerializeField] private AudioClip crowdCheer;
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
+    [SerializeField] private AudioClip crowdClap;
 
     private InputButtonData currentCorrectButton;
 
@@ -213,6 +215,9 @@ public class NEWCopyInput : MonoBehaviour
 
             previewDuration = previewDuration - 1.5f;
 
+            if (currentRound < totalRounds)
+                SFXManager.instance.CrowdClapClip(crowdClap, transform, 1f);
+
             if (currentSpawn != null)
 
                 Destroy(currentSpawn);
@@ -268,6 +273,8 @@ public class NEWCopyInput : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         introCurtain.SetTrigger("Starting");
+        introCurtain.ResetTrigger("Ending");
+
         introText.gameObject.SetActive(false);
 
         SpawnRandomDirection();
@@ -292,6 +299,11 @@ public class NEWCopyInput : MonoBehaviour
     IEnumerator EndGame()
     {
         yield return new WaitForSeconds(2.8f);
+
+        introCurtain.SetTrigger("Ending");
+        introCurtain.ResetTrigger("Starting");
+
+        yield return new WaitForSeconds(4f);
 
         SceneManager.LoadScene(2);
     }

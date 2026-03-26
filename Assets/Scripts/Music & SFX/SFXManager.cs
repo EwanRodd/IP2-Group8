@@ -8,6 +8,7 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private AudioSource CrowdObject;
     [SerializeField] private AudioSource BooObject;
     [SerializeField] private AudioSource PopObject;
+    [SerializeField] private AudioSource ClapObject;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,7 +19,7 @@ public class SFXManager : MonoBehaviour
         }
     }
 
-   public void CrowdCheerClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    public void CrowdCheerClip(AudioClip audioClip, Transform spawnTransform, float volume)
     {
         AudioSource audioSource = Instantiate(CrowdObject, spawnTransform.position, Quaternion.identity);
 
@@ -62,5 +63,21 @@ public class SFXManager : MonoBehaviour
         float clipLength = audioSource.clip.length;
 
         Destroy(audioSource.gameObject, clipLength);
+    }
+    public void CrowdClapClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    {
+        AudioSource audioSource = Instantiate(ClapObject, spawnTransform.position, Quaternion.identity);
+
+        audioSource.clip = audioClip;
+
+        audioSource.volume = volume;
+
+        audioSource.time = 2f;
+        audioSource.Play();
+
+        float clipLength = audioSource.clip.length;
+
+        Destroy(audioSource.gameObject, clipLength);
+
     }
 }

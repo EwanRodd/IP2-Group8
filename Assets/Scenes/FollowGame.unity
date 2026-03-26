@@ -294,6 +294,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IntroCurtain
       objectReference: {fileID: 0}
+    - target: {fileID: 870223366319258747, guid: af246eb293d4bc94daba959530d2bf9c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3407561162480131347, guid: af246eb293d4bc94daba959530d2bf9c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.02
