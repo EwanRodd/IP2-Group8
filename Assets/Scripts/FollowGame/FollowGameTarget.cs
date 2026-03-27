@@ -49,7 +49,7 @@ public class FollowGameTarget : MonoBehaviour
 
     IEnumerator GameStartDelay()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(7.8f);
 
         gameStarted = true;
     }

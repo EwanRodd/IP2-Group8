@@ -21,7 +21,6 @@ public class NEWCopyInput : MonoBehaviour
         public GameObject arrow;
         public GameObject successPrefab;
         public GameObject timerPrefab;
-        public GameObject hostPrefab;
         public GameObject wrongPrefab;
     }
 
@@ -32,8 +31,8 @@ public class NEWCopyInput : MonoBehaviour
     public GameObject[] randoInput;
 
     [Header("Spawn Location")]
-    public Transform previewSpawn;
-    private GameObject currentSpawn;
+    public Transform[] previewSpawns;
+    private GameObject[] currentSpawn;
     public Transform[] confettiSpawns;
     public Transform ExplosionSpawn;
     public Transform hostSpawn;
@@ -67,6 +66,10 @@ public class NEWCopyInput : MonoBehaviour
     public int totalRounds = 3;
     private int currentRound = 0;
 
+    private int currentIndex = 0;
+
+    public GameObject hostPrefab;
+
     [Header("Curtains")]
     public Animator Curtain;
     public Animator introCurtain;
@@ -77,7 +80,7 @@ public class NEWCopyInput : MonoBehaviour
     [SerializeField] private AudioClip pop;
     [SerializeField] private AudioClip crowdClap;
 
-    private InputButtonData currentCorrectButton;
+    private InputButtonData[] currentCorrectButton;
 
     void Start()
     {
@@ -85,21 +88,23 @@ public class NEWCopyInput : MonoBehaviour
         timeUpText.gameObject.SetActive(false);
         wrongText.gameObject.SetActive(false);
 
+        //Start the first round
         StartCoroutine(GameStartDelay());
     }
 
     void Update()
     {
-
+        //Check to see if either the game has started or finished
         if (showingPreview || gameDone)
             return;
 
-        
+        //Check if the timer is still running
         if (timerActive)
         {
             timer -= Time.deltaTime;
             timer = Mathf.Max(timer, 0f);
 
+            //Check if the time has ran out
             if (timer <= 0f)
             {
                 timerActive = false;
@@ -110,13 +115,14 @@ public class NEWCopyInput : MonoBehaviour
 
                 if (currentSpawn != null)
 
-                    Destroy(currentSpawn);
-                    Instantiate(currentCorrectButton.wrongPrefab, previewSpawn.position, currentCorrectButton.wrongPrefab.transform.rotation);
+                    Destroy(currentSpawn[currentIndex]);
+                Instantiate(currentCorrectButton[currentIndex].wrongPrefab, previewSpawns[currentIndex].position, currentCorrectButton[currentIndex].wrongPrefab.transform.rotation);
 
                 if (explosion != null)
                     Instantiate(explosion, ExplosionSpawn.position, ExplosionSpawn.rotation);
                 SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
 
+                //End the game
                 StartCoroutine(EndGame());
 
             }
@@ -142,26 +148,37 @@ public class NEWCopyInput : MonoBehaviour
         lastVertical = Input.GetAxisRaw("Vertical");
     }
 
+    //Function to choose the 5 inputs
     void SpawnRandomDirection()
     {
 
-        if (currentSpawn != null)
-        {
-            Destroy(currentSpawn);
-        }
+        //Clear previous arrows
+        ClearSpawns();
 
         if (theHostSpawn != null)
 
             Destroy(theHostSpawn);
+       
+        int inputCount = 5;
+        currentIndex = 0;
 
-        GameObject button = randoInput[Random.Range(0, randoInput.Length)];
+        currentSpawn = new GameObject[inputCount];
 
-        foreach (InputButtonData data in inputButtons)
+        currentCorrectButton = new InputButtonData[inputCount];
+
+        //Randomly select 5 inputs
+        for (int i = 0; i < inputCount; i++)
         {
-            if (data != null && data.arrow.name == button.name.Replace("(Clone)", ""))
+            GameObject button = randoInput[Random.Range(0, randoInput.Length)];
+
+            //Assign each input so it matches the correct input
+            foreach (InputButtonData data in inputButtons)
             {
-                currentCorrectButton = data;
-                break;
+                if (data != null && data.arrow.name == button.name.Replace("(Clone)", ""))
+                {
+                    currentCorrectButton[i] = data;
+                    break;
+                }
             }
         }
 
@@ -170,6 +187,7 @@ public class NEWCopyInput : MonoBehaviour
         StartCoroutine(PreviewRoutine());
     }
 
+    //Function to show the player all the buttons that need pressed
     IEnumerator PreviewRoutine()
     {
 
@@ -187,14 +205,17 @@ public class NEWCopyInput : MonoBehaviour
 
             Destroy (theHostSpawn);
 
-        theHostSpawn = Instantiate(currentCorrectButton.hostPrefab, hostSpawn.position, currentCorrectButton.hostPrefab.transform.rotation);
+        theHostSpawn = Instantiate(hostPrefab, hostSpawn.position,hostPrefab.transform.rotation);
 
         yield return new WaitForSeconds(0.5f);
         showingPreview = false;
 
-        currentSpawn = Instantiate(currentCorrectButton.timerPrefab, previewSpawn.position, currentCorrectButton.timerPrefab.transform.rotation);        
+        //Spawn all 5 arrows
+        for (int i = 0; i < currentCorrectButton.Length; i++)
+        {
+            currentSpawn[i] = Instantiate(currentCorrectButton[i].timerPrefab,previewSpawns[i].position,currentCorrectButton[i].timerPrefab.transform.rotation);
+        }
 
-        currentSpawn.SetActive(true);
         theHostSpawn.SetActive(true);
 
 
@@ -203,65 +224,101 @@ public class NEWCopyInput : MonoBehaviour
         inputPhase = true;
     }
 
+    //Function to check the users input
     void CheckInput(InputButtonData pressed)
     {
-        bool correct = pressed == currentCorrectButton;
+        //Check to see if the correct button was pressed
+        bool correct = pressed == currentCorrectButton[currentIndex];
 
+        //if the players input was correct
         if (correct)
         {
-            timerActive = false;
-            inputPhase = false;
-            currentRound++;
-
-            previewDuration = previewDuration - 1.5f;
-
-            if (currentRound < totalRounds)
-                SFXManager.instance.CrowdClapClip(crowdClap, transform, 1f);
-
+            
             if (currentSpawn != null)
+                Destroy(currentSpawn[currentIndex]);
 
-                Destroy(currentSpawn);
+            //Spawn green/correct arrow
+            currentSpawn[currentIndex] = Instantiate(currentCorrectButton[currentIndex].successPrefab,previewSpawns[currentIndex].position,currentCorrectButton[currentIndex].successPrefab.transform.rotation);
 
-            currentSpawn = Instantiate(currentCorrectButton.successPrefab, previewSpawn.position, currentCorrectButton.successPrefab.transform.rotation);
+            currentIndex++;
 
-
-            if (currentRound >= totalRounds)
+            //check to see if 5 inputs have been pressed and all correct
+            if (currentIndex >= currentCorrectButton.Length)
             {
+                timerActive = false;
+                inputPhase = false;
+                currentRound++;
 
-                if (confettiOne != null)
+                previewDuration -= 1.5f;
+
+                //Check to see the has not yet reached the final round
+                if (currentRound < totalRounds)
+                    SFXManager.instance.CrowdClapClip(crowdClap, transform, 1f);
+
+                //Check to see if the player has beaten all 3 rounds
+                if (currentRound >= totalRounds)
+                {
                     Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
-
-                if (confettiTwo != null)
                     Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
-                SFXManager.instance.PopClip(pop, transform, 0.5f);
-                SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
-                StartCoroutine(EndGame());
+                    SFXManager.instance.PopClip(pop, transform, 0.5f);
+                    SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
+
+                    StartCoroutine(EndGame());
+                }
+                //Start delay for next round
+                else
+                {
+                    StartCoroutine(NextRoundDelay());
+                }
             }
             else
             {
-                StartCoroutine(NextRoundDelay());
+
             }
         }
+        //If the players input was incorrect
         else
         {
+
             inputPhase = false;
             timerActive = false;
 
             wrongText.gameObject.SetActive(true);
+
             if (currentSpawn != null)
+                Destroy(currentSpawn[currentIndex]);
 
-                Destroy(currentSpawn);
-
-                Instantiate(currentCorrectButton.wrongPrefab, previewSpawn.position, currentCorrectButton.wrongPrefab.transform.rotation);
+            Instantiate(currentCorrectButton[currentIndex].wrongPrefab,previewSpawns[currentIndex].position,currentCorrectButton[currentIndex].wrongPrefab.transform.rotation);
 
             if (explosion != null)
                 Instantiate(explosion, ExplosionSpawn.position, ExplosionSpawn.rotation);
+
             SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
+
+
+            //End the game
             StartCoroutine(EndGame());
         }
     }
 
+
+    //Function to clear all the arrows between rounds, as well as delete the timer ones to be replaced with the correct ones
+    void ClearSpawns()
+    {
+        if (currentSpawn == null) return;
+
+        for (int i = 0; i < currentSpawn.Length; i++)
+        {
+            if (currentSpawn[i] != null)
+            {
+                Destroy(currentSpawn[i]);
+                currentSpawn[i] = null;
+            }
+        }
+    }
+
+    //Function for a delay at the start of the game
     IEnumerator GameStartDelay()
     {
         introText.gameObject.SetActive(true);
@@ -280,6 +337,7 @@ public class NEWCopyInput : MonoBehaviour
         SpawnRandomDirection();
     }
 
+    //Function to create a delay between each round and clear the previous arrows
     IEnumerator NextRoundDelay()
     {
         yield return new WaitForSeconds(2f);
@@ -289,13 +347,14 @@ public class NEWCopyInput : MonoBehaviour
 
         yield return new WaitForSeconds(delayBetweenRounds);
 
-        if (currentSpawn != null)
+        ClearSpawns();
 
-            Destroy(currentSpawn);
+        yield return null;
 
         SpawnRandomDirection();
     }
-        
+     
+    //Function to end the game
     IEnumerator EndGame()
     {
         yield return new WaitForSeconds(2.8f);

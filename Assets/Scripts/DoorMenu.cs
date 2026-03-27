@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class DoorMenu : MonoBehaviour
 {
-    static List<int> Games = new List<int> {5,6,7};
+    static List<int> Games = new List<int> {5,6,};
+    static List<int> originalGames = new List<int> { 5, 6,};
 
     public Animator wheel;
     public Animator introCurtain;
@@ -15,6 +16,8 @@ public class DoorMenu : MonoBehaviour
         wheel.ResetTrigger("CupGame");
         wheel.ResetTrigger("CopyGame");
         wheel.ResetTrigger("StackerGame");
+
+        DontDestroyOnLoad(gameObject);
 
         StartCoroutine(CurtainDelay());
     }
@@ -49,6 +52,29 @@ public class DoorMenu : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
 
         NextGame();
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += SceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= SceneLoaded;
+    }
+
+    void SceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex == 0)
+        {
+            ResetGames();
+        }
+    }
+
+    void ResetGames()
+    {
+        Games = new List<int>(originalGames);
     }
     IEnumerator CopyGame()
     {

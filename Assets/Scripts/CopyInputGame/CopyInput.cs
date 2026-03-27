@@ -255,7 +255,7 @@ public class CopyInput : MonoBehaviour
                 }
             }
 
-        }
+        }   
 
         //Check to see if the player was incorrect
         if (!correct)

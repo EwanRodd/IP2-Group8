@@ -19,6 +19,7 @@ public class SFXManager : MonoBehaviour
         }
     }
 
+    //Crowd Cheering sound effect
     public void CrowdCheerClip(AudioClip audioClip, Transform spawnTransform, float volume)
     {
         AudioSource audioSource = Instantiate(CrowdObject, spawnTransform.position, Quaternion.identity);
@@ -35,6 +36,7 @@ public class SFXManager : MonoBehaviour
         Destroy(audioSource.gameObject, clipLength);
     }
 
+    //Crowd booing sound effect
     public void CrowdBooClip(AudioClip audioClip, Transform spawnTransform, float volume)
     {
         AudioSource audioSource = Instantiate(BooObject, spawnTransform.position, Quaternion.identity);
@@ -50,6 +52,7 @@ public class SFXManager : MonoBehaviour
         Destroy(audioSource.gameObject, clipLength);
     }
 
+    //Confetti pop sound effect
     public void PopClip(AudioClip audioClip, Transform spawnTransform, float volume)
     {
         AudioSource audioSource = Instantiate(PopObject, spawnTransform.position, Quaternion.identity);
@@ -64,6 +67,8 @@ public class SFXManager : MonoBehaviour
 
         Destroy(audioSource.gameObject, clipLength);
     }
+
+    //Crowd clapping sound effect
     public void CrowdClapClip(AudioClip audioClip, Transform spawnTransform, float volume)
     {
         AudioSource audioSource = Instantiate(ClapObject, spawnTransform.position, Quaternion.identity);

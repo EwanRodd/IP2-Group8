@@ -9,6 +9,8 @@ public class Music : MonoBehaviour
     public static Music music;
     void Start()
     {
+
+        //Check if the scene is the main menu
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             Debug.Log("Destroyed");
@@ -20,6 +22,8 @@ public class Music : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        //Don't destroy the music when going to each game
         music = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -35,6 +39,7 @@ public class Music : MonoBehaviour
 
     void SceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        //Check if the scene is the main menu
         if (scene.buildIndex == 0)
         {
             Destroy(gameObject);

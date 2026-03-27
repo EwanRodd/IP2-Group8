@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.GraphicsBuffer;
 
@@ -30,6 +31,7 @@ public class FollowGameMovement : MonoBehaviour
     public TMP_Text introText;
     public Animator openingText;
     public Animator introCurtain;
+    public Animator woodenSign;
 
     public bool gameStarted = false;
 
@@ -100,12 +102,14 @@ public class FollowGameMovement : MonoBehaviour
         {
             timer = 0f;
             warning.gameObject.SetActive(false);
+            Gamepad.current.SetMotorSpeeds(0f, 0f);
         }
         //Check if the player is outside the circle, if so, start the grace time and display a warning
         else
         {
             timer += Time.deltaTime;
             warning.gameObject.SetActive(true);
+            Gamepad.current.SetMotorSpeeds(0.123f, 0.234f); 
 
             //Check to see if the player has exceded their grace time and lost
             if (timer >= graceTime)
@@ -115,18 +119,31 @@ public class FollowGameMovement : MonoBehaviour
         }
     }
 
+    //Delay before the game starts
     IEnumerator GameStartDelay()
     {
         introText.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
+
+        woodenSign.SetTrigger("In");
+
+        yield return new WaitForSeconds(1f);
 
         openingText.SetTrigger("Out");
+
+        yield return new WaitForSeconds(1f);
+
+        woodenSign.SetTrigger("Out");
+        woodenSign.ResetTrigger("In");
+
         yield return new WaitForSeconds(1f);
 
         introCurtain.SetTrigger("Starting");
+        introCurtain.ResetTrigger("Ending");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.8f);
+
         introText.gameObject.SetActive(false);
 
         gameStarted = true;
@@ -143,6 +160,11 @@ public class FollowGameMovement : MonoBehaviour
     IEnumerator EndGame()
     {
         yield return new WaitForSeconds(2.8f);
+
+        introCurtain.SetTrigger("Ending");
+        introCurtain.ResetTrigger("Starting");
+
+        yield return new WaitForSeconds(4f);
 
         SceneManager.LoadScene(2);
     }
