@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class DoorMenu : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class DoorMenu : MonoBehaviour
 
     public Animator wheel;
     public Animator introCurtain;
+
+    public TMP_Text score;
+    [SerializeField]
+    private FloatSO scoreSO;
 
     public void Start()
     {
@@ -20,6 +25,8 @@ public class DoorMenu : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         StartCoroutine(CurtainDelay());
+
+        score.text = "Score: " + scoreSO.Value;
     }
     public void NextGame()
     {

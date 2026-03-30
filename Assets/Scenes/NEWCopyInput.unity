@@ -1171,6 +1171,7 @@ MonoBehaviour:
   crowdBoo: {fileID: 8300000, guid: 029c98ceb38bda949a468c673bd58077, type: 3}
   pop: {fileID: 8300000, guid: 212183505e17dae4ea5ab8283604594e, type: 3}
   crowdClap: {fileID: 8300000, guid: 8772eb43efd60d14a9bb32dabf18d4fa, type: 3}
+  scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
 --- !u!114 &1481576439
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions.Comparers;
 using UnityEngine.SceneManagement;
 
 public class NEWCopyInput : MonoBehaviour
@@ -81,6 +82,9 @@ public class NEWCopyInput : MonoBehaviour
     [SerializeField] private AudioClip crowdClap;
 
     private InputButtonData[] currentCorrectButton;
+
+    [SerializeField]
+    private FloatSO scoreSO;
 
     void Start()
     {
@@ -263,6 +267,8 @@ public class NEWCopyInput : MonoBehaviour
 
                     SFXManager.instance.PopClip(pop, transform, 0.5f);
                     SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
+
+                    scoreSO.Value++;
 
                     StartCoroutine(EndGame());
                 }

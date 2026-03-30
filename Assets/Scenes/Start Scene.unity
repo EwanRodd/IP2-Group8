@@ -263,6 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelLoader: {fileID: 1707372680}
+  scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
 --- !u!1 &224711472
 GameObject:
   m_ObjectHideFlags: 0
@@ -2369,6 +2370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelLoader: {fileID: 0}
+  scoreSO: {fileID: 0}
 --- !u!1 &2097987359
 GameObject:
   m_ObjectHideFlags: 0
