@@ -6,8 +6,8 @@ using TMPro;
 
 public class DoorMenu : MonoBehaviour
 {
-    static List<int> Games = new List<int> {5,6,};
-    static List<int> originalGames = new List<int> { 5, 6,};
+    static List<int> Games = new List<int> {5,8,};
+    static List<int> originalGames = new List<int> { 5, 8,};
 
     public Animator wheel;
     public Animator introCurtain;
@@ -20,7 +20,7 @@ public class DoorMenu : MonoBehaviour
     {
         wheel.ResetTrigger("CupGame");
         wheel.ResetTrigger("CopyGame");
-        wheel.ResetTrigger("StackerGame");
+        wheel.ResetTrigger("FollowGame");
 
         DontDestroyOnLoad(gameObject);
 
@@ -41,9 +41,9 @@ public class DoorMenu : MonoBehaviour
         {
             StartCoroutine(CopyGame());
         }
-        else if (nextLevel == 6)
+        else if (nextLevel == 8)
         {
-            StartCoroutine(StackerGame());
+            StartCoroutine(FollowGame());
         }
         else if (nextLevel == 7)
         {
@@ -96,9 +96,9 @@ public class DoorMenu : MonoBehaviour
         SceneManager.LoadScene(5);
     }
 
-    IEnumerator StackerGame()
+    IEnumerator FollowGame()
     {
-        wheel.SetTrigger("StackerGame");
+        wheel.SetTrigger("FollowGame");
         yield return new WaitForSeconds(5f);
 
         introCurtain.ResetTrigger("Starting");
@@ -106,7 +106,7 @@ public class DoorMenu : MonoBehaviour
 
         yield return new WaitForSeconds(3.5f);
 
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(8);
     }
 
     IEnumerator CupGame()

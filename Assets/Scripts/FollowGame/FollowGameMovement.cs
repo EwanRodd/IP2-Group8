@@ -35,6 +35,9 @@ public class FollowGameMovement : MonoBehaviour
 
     public bool gameStarted = false;
 
+    [SerializeField]
+    private FloatSO scoreSO;
+
 
     public bool gameDone = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -87,6 +90,8 @@ public class FollowGameMovement : MonoBehaviour
 
                 SFXManager.instance.PopClip(pop, transform, 0.5f);
                 SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
+
+                scoreSO.Value++;
 
                 winTimerActive = false;
                 gameDone = true;

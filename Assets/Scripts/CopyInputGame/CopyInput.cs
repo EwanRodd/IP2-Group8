@@ -6,7 +6,7 @@ using TMPro;
 
 public class CopyInput : MonoBehaviour
 {
-
+    //THIS SCRIPT IS FOR AN OLD VERSION OF THE COPY INPUT GAME
     public enum InputType
     {
         Button, Direction

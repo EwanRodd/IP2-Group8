@@ -935,6 +935,7 @@ MonoBehaviour:
   introCurtain: {fileID: 255939470}
   woodenSign: {fileID: 133079063}
   gameStarted: 0
+  scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
   gameDone: 0
 --- !u!212 &1266339288
 SpriteRenderer:

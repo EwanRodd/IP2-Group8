@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CupGameScene#.unity
     guid: 52508838b32e90d4399aca631bd81ba2
+  - enabled: 1
+    path: Assets/Scenes/FollowGame.unity
+    guid: 423a1a3c703f16c44af9fa9992238dd2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
