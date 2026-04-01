@@ -17,7 +17,7 @@ public class DoorMenu : MonoBehaviour
     private FloatSO scoreSO;
 
     public void Start()
-    {
+    {       
         wheel.ResetTrigger("CupGame");
         wheel.ResetTrigger("CopyGame");
         wheel.ResetTrigger("FollowGame");
@@ -53,6 +53,11 @@ public class DoorMenu : MonoBehaviour
 
     IEnumerator CurtainDelay()
     {
+        if (Games.Count == 0)
+        {
+            EndGame();
+        }
+
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 
@@ -120,6 +125,11 @@ public class DoorMenu : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
 
         SceneManager.LoadScene(7);
+    }
+
+    void EndGame()
+    {
+        SceneManager.LoadScene(9);
     }
 
     public void Door1()
