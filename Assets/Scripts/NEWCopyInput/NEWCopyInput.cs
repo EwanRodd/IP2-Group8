@@ -47,7 +47,6 @@ public class NEWCopyInput : MonoBehaviour
     [Header("UI")]
     public TMP_Text timeUpText;
     public TMP_Text wrongText;
-    public TMP_Text introText;
     public Animator openingText;
 
     [Header("Timer Settings")]
@@ -88,7 +87,6 @@ public class NEWCopyInput : MonoBehaviour
 
     void Start()
     {
-        introText.gameObject.SetActive(false);
         timeUpText.gameObject.SetActive(false);
         wrongText.gameObject.SetActive(false);
 
@@ -327,7 +325,6 @@ public class NEWCopyInput : MonoBehaviour
     //Function for a delay at the start of the game
     IEnumerator GameStartDelay()
     {
-        introText.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(3f);
 
@@ -338,7 +335,6 @@ public class NEWCopyInput : MonoBehaviour
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 
-        introText.gameObject.SetActive(false);
 
         SpawnRandomDirection();
     }
