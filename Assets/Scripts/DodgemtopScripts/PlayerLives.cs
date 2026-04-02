@@ -32,19 +32,10 @@ public class PlayerLives : MonoBehaviour
           if (lives <= 0)
           {
             Destroy(gameObject);
-            StartCoroutine(EndGame());
-
+            Time.timeScale = 0;
           }
            
         }
     }
-
-    private IEnumerator EndGame()
-    {
-        yield return new WaitForSeconds(delay);
-
-        SceneManager.LoadScene(2);
-    }
-
 
 }

@@ -269,6 +269,7 @@ MonoBehaviour:
   CrowdObject: {fileID: 8690614476625699726, guid: 2b30e06ffd6200043b8f603525d8de6a, type: 3}
   BooObject: {fileID: 4299548206657055197, guid: 286e4a2bd43216d449bd0acd0972ebe6, type: 3}
   PopObject: {fileID: 341322963768551883, guid: e5fe4840e8bc78f49ad91ccadcf568af, type: 3}
+  ClapObject: {fileID: 0}
 --- !u!4 &365626321
 Transform:
   m_ObjectHideFlags: 0
@@ -972,6 +973,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDistance: 2
+  spriteRenderer: {fileID: 0}
+  cupNormal: {fileID: 0}
+  cupHand: {fileID: 0}
   gameManager: {fileID: 986161089}
 --- !u!4 &1525791260
 Transform:
@@ -1136,6 +1140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDistance: 2
+  spriteRenderer: {fileID: 0}
+  cupNormal: {fileID: 0}
+  cupHand: {fileID: 0}
   gameManager: {fileID: 986161089}
 --- !u!212 &1704516364
 SpriteRenderer:
@@ -1285,6 +1292,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDistance: 2
+  spriteRenderer: {fileID: 0}
+  cupNormal: {fileID: 0}
+  cupHand: {fileID: 0}
   gameManager: {fileID: 986161089}
 --- !u!212 &1731948733
 SpriteRenderer:
@@ -1434,6 +1444,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDistance: 2
+  spriteRenderer: {fileID: 0}
+  cupNormal: {fileID: 0}
+  cupHand: {fileID: 0}
   gameManager: {fileID: 986161089}
 --- !u!212 &2142519971
 SpriteRenderer:
