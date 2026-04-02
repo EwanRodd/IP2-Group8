@@ -9,13 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Start Scene.unity
     guid: 9d0ed11ee79b04d4d9140335c2414ef1
   - enabled: 1
-    path: Assets/Scenes/CupGame.unity
+    path: Assets/Scenes/DefunctPrototypes/CupGame.unity
     guid: 72dccaa3d93a5eb438336b200103277a
   - enabled: 1
     path: Assets/Scenes/TransitionScene.unity
     guid: 0affbe57a3afb704f93f86fcdaa579ce
   - enabled: 1
-    path: Assets/Scenes/CopyInputGame.unity
+    path: Assets/Scenes/DefunctPrototypes/CopyInputGame.unity
     guid: 3754c279d071e72439cf53ffebc45158
   - enabled: 1
     path: Assets/Scenes/TomatoGame.unity
@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/StackerGame.unity
     guid: 2245c2f4cd226ba468c7accd93f01ef3
   - enabled: 1
-    path: Assets/Scenes/CupGameScene#.unity
+    path: Assets/Scenes/CupGameScene.unity
     guid: 52508838b32e90d4399aca631bd81ba2
   - enabled: 1
     path: Assets/Scenes/FollowGame.unity

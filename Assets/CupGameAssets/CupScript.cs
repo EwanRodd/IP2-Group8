@@ -13,11 +13,17 @@ public class Cup : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Sprite cupNormal;
     public Sprite cupHand;
+    public Sprite cupTilt;
 
     [SerializeField] private CupGameManager gameManager;
 
     private void Start()
     {
+        StartCoroutine(GoDown());
+    }
+    private IEnumerator GoDown()
+    {
+        yield return new WaitForSeconds(1f);
         MoveVertical(-moveDistance);
     }
 
@@ -40,6 +46,7 @@ public class Cup : MonoBehaviour
     {
         if (interactable)
         {
+            BecomeHand();
             MoveVertical(moveDistance);
             gameManager.OnCupClicked(this);
         }
@@ -49,11 +56,25 @@ public class Cup : MonoBehaviour
     public void BecomeHand()
     {
         spriteRenderer.sprite = cupHand;
+        //transform.position = new Vector3(transform.position.x - 0.05f , transform.position.y + 0.66f, transform.position.z);
+        // these manual adjustments of the positions are just cause the two sprites are slightly offset and this fixes that
     }
 
     public void BecomeCup()
     {
+        if (spriteRenderer.sprite == cupTilt || true)
+        {
+            transform.Rotate(0f, 0f, -15f);
+        }
         spriteRenderer.sprite = cupNormal;
+        //transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y - 0.66f, transform.position.z);
+        // these manual adjustments of the positions are just cause the two sprites are slightly offset and this fixes that
+    }
+
+    public void BecomeTilt()
+    {
+        spriteRenderer.sprite = cupTilt;
+        transform.Rotate(0f, 0f, 15f);
     }
 
     public void MoveVertical(float distance)

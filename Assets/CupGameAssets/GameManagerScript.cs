@@ -38,7 +38,7 @@ public class CupGameManager : MonoBehaviour
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
 
-
+    private int selectedCup = 1;
 
     private Cup cupWithBall;
     public enum Difficulty
@@ -53,12 +53,32 @@ public class CupGameManager : MonoBehaviour
         ApplyDifficulty();
         PlaceBallUnderRandomCup();
         StartCoroutine(ShuffleRoutine());
+        cups[selectedCup].BecomeTilt();
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if (Input.GetButtonDown("Horizontal"))
+        {
+            float dir = Input.GetAxisRaw("Horizontal");
+
+            if (dir > 0 && selectedCup < 3)
+            {
+                cups[selectedCup].BecomeCup();
+                selectedCup += 1;
+            }
+            else if (dir < 0 && selectedCup > 0)
+            {
+                cups[selectedCup].BecomeCup();
+                selectedCup -= 1;
+            }
+
+            Debug.Log(selectedCup);
+            cups[selectedCup].BecomeTilt();
+
         }
     }
     private void ApplyDifficulty()
@@ -138,7 +158,7 @@ public class CupGameManager : MonoBehaviour
 
     private IEnumerator ShuffleRoutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         cupWithBall.PlaceBall(ball);
 
@@ -148,6 +168,8 @@ public class CupGameManager : MonoBehaviour
             a.BecomeHand();
             b.BecomeHand();
             yield return SwapCups(a, b);
+
+            yield return new WaitForSeconds(0.1f);
             a.BecomeCup();
             b.BecomeCup();
         }
@@ -192,8 +214,10 @@ public class CupGameManager : MonoBehaviour
 
             float height = Mathf.Sin(t * Mathf.PI) * swapHeight;
 
-            cupA.transform.position = Vector3.Lerp(startA, startB, t) + Vector3.up * height;
+            cupA.transform.position = Vector3.Lerp(startA, startB, t) + ( Vector3.up * height );
+            //cupA.transform.position = new Vector3(cupA.transform.position.x, cupA.transform.position.y + 0.66f, cupA.transform.position.z);
             cupB.transform.position = Vector3.Lerp(startB, startA, t) + Vector3.up * height;
+            //cupB.transform.position = new Vector3(cupB.transform.position.x, cupB.transform.position.y + 0.66f, cupB.transform.position.z);
 
             yield return null;
         }

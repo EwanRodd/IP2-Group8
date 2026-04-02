@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.5, y: 2, z: 0}
-  m_LocalScale: {x: 0.67, y: 0.67, z: 0.67}
+  m_LocalScale: {x: 1.33, y: 1.33, z: 1.33}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -48,8 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 2
   spriteRenderer: {fileID: 8814444253919421119}
-  cupNormal: {fileID: 2251344053077513767, guid: ff4a4a06ad518a34dbdea2d6c2a97479, type: 3}
-  cupHand: {fileID: 2304548656417603896, guid: 557cb5b0ebcc0354a90ab51a9cdd4f6d, type: 3}
+  cupNormal: {fileID: 381891196378272548, guid: 415c2348842133048bd712f804bdc770, type: 3}
+  cupHand: {fileID: 8056269757015164320, guid: 30c8fc4e75e7a7046b981514f08e611f, type: 3}
+  cupTilt: {fileID: 381891196378272548, guid: 415c2348842133048bd712f804bdc770, type: 3}
   gameManager: {fileID: 0}
 --- !u!212 &8814444253919421119
 SpriteRenderer:
@@ -95,7 +96,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2251344053077513767, guid: ff4a4a06ad518a34dbdea2d6c2a97479, type: 3}
+  m_Sprite: {fileID: 381891196378272548, guid: 415c2348842133048bd712f804bdc770, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -144,11 +145,11 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.3, y: 4.11}
+    oldSize: {x: 1.67, y: 2.08}
     newSize: {x: 3.15, y: 3.96}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3, y: 4}
+  m_Size: {x: 1.8, y: 2.2}
   m_EdgeRadius: 0
