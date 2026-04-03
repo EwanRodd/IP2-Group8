@@ -25,7 +25,7 @@ public class Slingshot : MonoBehaviour
     void Update()
     {
         // ------For testing --------
-        //Pc_LeftMouseButtonDown();
+        Pc_LeftMouseButtonDown();
 
     }
 
