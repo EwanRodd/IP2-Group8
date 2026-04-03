@@ -9,11 +9,15 @@ public class Token : MonoBehaviour
     public float minDistance = 2f;
     public Manager manager;
 
-    void PickNewTarget()
+    private void Start()
+    {
+        MoveNewTarget();
+    }
+    void MoveNewTarget()
     {
         Vector2 newTarget;
 
-        do
+        do 
         {
             newTarget = new Vector2(
                 Random.Range(minBounds.x, maxBounds.x),
@@ -27,9 +31,9 @@ public class Token : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
+        {x
             manager.AddScore(1);
-            PickNewTarget();
+            MoveNewTarget();
             transform.position = target;
         }        
     }
