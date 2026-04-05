@@ -19,8 +19,8 @@ public class PlayerDodgem : MonoBehaviour
 
     void Update()
     {
-        moveInput = Input.GetAxis("Vertical");
-        turnInput = Input.GetAxis("Horizontal");
+        moveInput = Input.GetAxisRaw("Vertical");
+        turnInput = Input.GetAxisRaw("Horizontal");
     }
 
     void FixedUpdate()

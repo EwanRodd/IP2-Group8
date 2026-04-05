@@ -789,12 +789,15 @@ MonoBehaviour:
   - {fileID: 1418364923}
   - {fileID: 1916863169}
   difficulty: 0
-  easySwaps: 0
+  easySwaps: 5
   mediumSwaps: 6
   hardSwaps: 7
   easySwapSpeed: 0.65
   mediumSwapSpeed: 0.5
   hardSwapSpeed: 0.4
+  easyStopSpeed: 0.1
+  mediumStopSpeed: 0.01
+  hardStopSpeed: 0
   swapHeight: 1
   confettiSpawns:
   - {fileID: 1285260638}
@@ -804,6 +807,7 @@ MonoBehaviour:
   crowdCheer: {fileID: 8300000, guid: d73a3df7f1e1bbe47833495f936af39b, type: 3}
   crowdBoo: {fileID: 8300000, guid: 029c98ceb38bda949a468c673bd58077, type: 3}
   pop: {fileID: 8300000, guid: 212183505e17dae4ea5ab8283604594e, type: 3}
+  selecting: 0
 --- !u!4 &1113521209 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2579698036538431572, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
@@ -1079,6 +1083,18 @@ PrefabInstance:
       value: Cup 2
       objectReference: {fileID: 0}
     - target: {fileID: 2579698036538431572, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579698036538431572, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579698036538431572, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579698036538431572, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5
       objectReference: {fileID: 0}
@@ -1118,10 +1134,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7876060440813927229, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876060440813927229, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814444253919421119, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 381891196378272548, guid: 415c2348842133048bd712f804bdc770, type: 3}
     - target: {fileID: 9079412722784201024, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 986161089}
+    - target: {fileID: 9079412722784201024, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: tiltScale.x
+      value: 0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079412722784201024, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: tiltScale.y
+      value: 0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079412722784201024, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: tiltScale.z
+      value: 0.56
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1138,6 +1178,18 @@ PrefabInstance:
     - target: {fileID: 1357106472543606233, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
       propertyPath: m_Name
       value: Cup 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579698036538431572, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579698036538431572, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2579698036538431572, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.33
       objectReference: {fileID: 0}
     - target: {fileID: 2579698036538431572, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1179,6 +1231,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7876060440813927229, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 4.2200003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876060440813927229, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 4.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8814444253919421119, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 381891196378272548, guid: 415c2348842133048bd712f804bdc770, type: 3}
     - target: {fileID: 9079412722784201024, guid: 4c9efb2a1a67edf4083e38f46d43a453, type: 3}
       propertyPath: gameManager
       value: 

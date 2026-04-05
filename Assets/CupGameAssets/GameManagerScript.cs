@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 //using static UnityEngine.Rendering.DebugUI;
 
@@ -23,11 +25,16 @@ public class CupGameManager : MonoBehaviour
     [SerializeField] private float mediumSwapSpeed = 0.5f;
     [SerializeField] private float hardSwapSpeed = 0.35f;
 
+    [SerializeField] private float easyStopSpeed = 0.1f;
+    [SerializeField] private float mediumStopSpeed = 0.05f;
+    [SerializeField] private float hardStopSpeed = 0f;
+
     [SerializeField] private float swapHeight = 0.5f;
 
     private int swapCount = 5;
     private float swapDuration = 0.5f;
     private int delay = 3;
+    private float stopSpeed;
 
     [Header("Confetti")]
     public Transform[] confettiSpawns;
@@ -38,7 +45,8 @@ public class CupGameManager : MonoBehaviour
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
 
-    private int selectedCup = 1;
+    private int selectedCup = 0;
+    public bool selecting = false;
 
     private Cup cupWithBall;
     public enum Difficulty
@@ -53,60 +61,71 @@ public class CupGameManager : MonoBehaviour
         ApplyDifficulty();
         PlaceBallUnderRandomCup();
         StartCoroutine(ShuffleRoutine());
-        cups[selectedCup].BecomeTilt();
     }
+
+    private float lastHorizontal = 0f;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        if (Input.GetButtonDown("Horizontal"))
+        if (selecting)
         {
             float dir = Input.GetAxisRaw("Horizontal");
 
-            if (dir > 0 && selectedCup < 3)
+            if (dir != 0 && lastHorizontal == 0) // detects "press"
             {
-                cups[selectedCup].BecomeCup();
-                selectedCup += 1;
-            }
-            else if (dir < 0 && selectedCup > 0)
-            {
-                cups[selectedCup].BecomeCup();
-                selectedCup -= 1;
+                if (dir > 0 && selectedCup < 3)
+                {
+                    cups[selectedCup].BecomeCup();
+                    selectedCup += 1;
+                    cups[selectedCup].BecomeTilt();
+                }
+                else if (dir < 0 && selectedCup > 0)
+                {
+                    cups[selectedCup].BecomeCup();
+                    selectedCup -= 1;
+                    cups[selectedCup].BecomeTilt();
+                }
+
+                Debug.Log(selectedCup);
+                
             }
 
-            Debug.Log(selectedCup);
-            cups[selectedCup].BecomeTilt();
+            if (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame)
+            {
+                Debug.Log("South button pressed");
+                cups[selectedCup].OnMouseDown();
+            }
 
+            lastHorizontal = dir;
         }
     }
     private void ApplyDifficulty()
     {
+        //just applying the difficulty variables
         switch (difficulty)
         {
             case Difficulty.Easy:
                 swapCount = easySwaps;
                 swapDuration = easySwapSpeed;
+                stopSpeed = easyStopSpeed;
                 break;
 
             case Difficulty.Medium:
                 swapCount = mediumSwaps;
                 swapDuration = mediumSwapSpeed;
+                stopSpeed = mediumStopSpeed;
                 break;
 
             case Difficulty.Hard:
                 swapCount = hardSwaps;
                 swapDuration = hardSwapSpeed;
+                stopSpeed = hardStopSpeed;
                 break;
         }
     }
     public void OnCupClicked(Cup clickedCup)
     {
-        // Lock all cups immediately
         SetCupsInteractable(false);
 
-        // Optional: check result
         bool correct = clickedCup == cupWithBall;
         
         if (correct)
@@ -148,7 +167,7 @@ public class CupGameManager : MonoBehaviour
 
     private void PlaceBallUnderRandomCup()
     {
-        cupWithBall = cups[Random.Range(0, cups.Length)];
+        cupWithBall = cups[UnityEngine.Random.Range(0, cups.Length)];
 
         Vector3 ballPosition = cupWithBall.transform.position;
         ballPosition.y -= 2f;
@@ -169,7 +188,8 @@ public class CupGameManager : MonoBehaviour
             b.BecomeHand();
             yield return SwapCups(a, b);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(stopSpeed);
+            //stopSpeed is the buffer when a cup gets swapped, and then stays like that for a bit before moving to the next swap
             a.BecomeCup();
             b.BecomeCup();
         }
@@ -177,6 +197,11 @@ public class CupGameManager : MonoBehaviour
         ball.SetParent(null);
 
         SetCupsInteractable(true);
+
+        selecting = true;
+        Array.Sort(cups, (a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
+        cups[selectedCup].BecomeTilt();
+
     }
     public void SetCupsInteractable(bool value)
     {
@@ -188,12 +213,12 @@ public class CupGameManager : MonoBehaviour
 
     private (Cup, Cup) GetTwoDifferentCups()
     {
-        int first = Random.Range(0, cups.Length);
+        int first = UnityEngine.Random.Range(0, cups.Length);
         int second;
 
         do
         {
-            second = Random.Range(0, cups.Length);
+            second = UnityEngine.Random.Range(0, cups.Length);
         }
         while (second == first);
 

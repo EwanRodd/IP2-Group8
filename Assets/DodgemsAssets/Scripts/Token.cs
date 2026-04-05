@@ -31,7 +31,7 @@ public class Token : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {x
+        {
             manager.AddScore(1);
             MoveNewTarget();
             transform.position = target;

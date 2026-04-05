@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Cup : MonoBehaviour
 {
-
-    //these should really be prefabs but ehh sunk cost fallacy
-
     public float moveDistance = 2f;
     private float moveSpeed = 3f;
     private bool interactable = false;
@@ -14,6 +11,9 @@ public class Cup : MonoBehaviour
     public Sprite cupNormal;
     public Sprite cupHand;
     public Sprite cupTilt;
+
+    public Vector3 normalScale;
+    public Vector3 tiltScale;
 
     [SerializeField] private CupGameManager gameManager;
 
@@ -29,6 +29,8 @@ public class Cup : MonoBehaviour
 
     public void PlaceBall(Transform ball)
     {
+        //making this cup the parent of the ball
+        //so the ball travels with the cup
         ball.SetParent(transform);
         ball.localPosition = Vector3.forward;
     }
@@ -42,8 +44,11 @@ public class Cup : MonoBehaviour
         interactable = value;
     }
 
-    private void OnMouseDown()
+    //you dont use mouse anymore but this is the function called on when selecting with controller
+    //which is spaghetti but who cares
+    public void OnMouseDown()
     {
+        Debug.Log("Moused");
         if (interactable)
         {
             BecomeHand();
@@ -53,36 +58,54 @@ public class Cup : MonoBehaviour
     }
 
 
+    //BecomeHand(), BecomeCup(), and BecomeTilt() are all of a trio
+    //Their purpose is to just be a function to change the cups sprites and be accessible from the manager
+    //But also, each sprite is slightly different and offset due to exporting fuckery
+    //So each function will manually adjust their positions and scaling just slightly to fix this
+    //you may say "these should really use less magic numbers that seems untenable"
+    //to which I say shut up it works
+
     public void BecomeHand()
     {
+        if (spriteRenderer.sprite == cupTilt)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - 0.247f, transform.position.z);
+        }
+        transform.position = new Vector3(transform.position.x - 0.05f , transform.position.y + 0.66f, transform.position.z);
         spriteRenderer.sprite = cupHand;
-        //transform.position = new Vector3(transform.position.x - 0.05f , transform.position.y + 0.66f, transform.position.z);
-        // these manual adjustments of the positions are just cause the two sprites are slightly offset and this fixes that
+        transform.localScale = normalScale;
     }
 
     public void BecomeCup()
     {
-        if (spriteRenderer.sprite == cupTilt || true)
+        if (spriteRenderer.sprite == cupHand)
         {
-            transform.Rotate(0f, 0f, -15f);
+            transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y - 0.66f, transform.position.z);
+        }
+        else if (spriteRenderer.sprite == cupTilt)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - 0.247f, transform.position.z);
         }
         spriteRenderer.sprite = cupNormal;
-        //transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y - 0.66f, transform.position.z);
-        // these manual adjustments of the positions are just cause the two sprites are slightly offset and this fixes that
+        transform.localScale = normalScale;
     }
 
     public void BecomeTilt()
     {
         spriteRenderer.sprite = cupTilt;
-        transform.Rotate(0f, 0f, 15f);
+        transform.position = new Vector3(transform.position.x, transform.position.y + 0.247f, transform.position.z);
+        transform.localScale = tiltScale;
     }
 
+
+    //go up or go down using the smooth animation thing
     public void MoveVertical(float distance)
     {
         Vector3 targetPosition = transform.position + Vector3.up * distance;
         StartCoroutine(MoveToPosition(targetPosition));
     }
 
+    //the smooth animation thing
     private IEnumerator MoveToPosition(Vector3 target)
     {
         Debug.Log("moving");
