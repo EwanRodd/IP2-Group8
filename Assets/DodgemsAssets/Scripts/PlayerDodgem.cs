@@ -26,7 +26,6 @@ public class PlayerDodgem : MonoBehaviour
     void FixedUpdate()
     {
         float newRotation = rb.rotation - turnInput * turnSpeed;
-        Debug.Log(turnInput);
         rb.rotation = newRotation; // direct assignment = instant response
 
         Vector2 targetVelocity = transform.up * moveInput * speed;

@@ -1528,6 +1528,7 @@ MonoBehaviour:
   timerText: {fileID: 68391984}
   maxTimer: 30
   elapsedTime: 0
+  token: {fileID: 901781107}
 --- !u!1001 &1650092176
 PrefabInstance:
   m_ObjectHideFlags: 0
