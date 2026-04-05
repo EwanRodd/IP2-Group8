@@ -1529,6 +1529,7 @@ MonoBehaviour:
   maxTimer: 30
   elapsedTime: 0
   token: {fileID: 901781107}
+  gameState: active
 --- !u!1001 &1650092176
 PrefabInstance:
   m_ObjectHideFlags: 0
