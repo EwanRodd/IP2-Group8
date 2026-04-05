@@ -10,32 +10,45 @@ public class PlayerLives : MonoBehaviour
     private int delay = 3;
     public GameObject winText;
     public GameObject failText;
+
+    public Animator Curtain;
+    public Animator introCurtain;
+
+    private void Start()
+    {
+      
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         print(collision.gameObject.name);
 
-        if(collision.GetComponent<CapsuleCollider2D>() && collision.gameObject.tag == "Enemy")
+        if (collision.GetComponent<CapsuleCollider2D>() && collision.gameObject.tag == "Enemy")
         {
-          Destroy(collision.gameObject);
-          lives -= 1;      
-          for(int i = 0; i < livesUI.Length; i++)
+            Destroy(collision.gameObject);
+            lives -= 1;
+            for (int i = 0; i < livesUI.Length; i++)
             {
-                if(i < lives)
+                if (i < lives)
                 {
                     livesUI[i].enabled = true;
                 }
                 else
                 {
-                    livesUI[i].enabled=false;
+                    livesUI[i].enabled = false;
                 }
-           }
-          if (lives <= 0)
-          {
-            Destroy(gameObject);
-            Time.timeScale = 0;
-          }
-           
+            }
+
         }
     }
+    void Update()
+    {
+        if (lives <= 0)
+        {
+            Destroy(gameObject);
+            Time.timeScale = 0;
 
+
+        }
+    }
 }
+
