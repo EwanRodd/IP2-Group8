@@ -10,7 +10,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            gameManager.CompleteLevel();
+            gameManager.WinGame();
         }
        
     }

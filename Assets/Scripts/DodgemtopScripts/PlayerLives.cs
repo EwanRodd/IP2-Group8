@@ -14,6 +14,8 @@ public class PlayerLives : MonoBehaviour
     public Animator Curtain;
     public Animator introCurtain;
 
+    public GameManager gameManager;
+
     private void Start()
     {
       
@@ -47,7 +49,7 @@ public class PlayerLives : MonoBehaviour
             Destroy(gameObject);
             Time.timeScale = 0;
 
-
+            gameManager.LoseGame();
         }
     }
 }
