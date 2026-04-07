@@ -14,14 +14,29 @@ public class EnemyDodgem : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 target;
 
+    public Manager manager;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        PickNewTarget();
+
+        if(manager.gameState == "active")
+        {
+            PickNewTarget();
+        }
+        
     }
 
     void FixedUpdate()
     {
+
+        if (manager.gameState != "active")
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            return;
+        }
+
         MoveTowardsTarget();
         /*if (rb.linearVelocity.magnitude < 0.1f)
         {
@@ -66,7 +81,7 @@ public class EnemyDodgem : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, target);
 
-        if (distance < targetReachDistance)
+        if (distance < targetReachDistance && manager.gameState == "active")
         {
             PickNewTarget();
         }

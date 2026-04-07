@@ -12,6 +12,8 @@ public class PlayerDodgem : MonoBehaviour
 
     Rigidbody2D rb;
 
+    public Manager manager;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,8 +21,12 @@ public class PlayerDodgem : MonoBehaviour
 
     void Update()
     {
-        moveInput = Input.GetAxisRaw("Vertical");
-        turnInput = Input.GetAxisRaw("Horizontal");
+        if (manager.gameState == "active")
+        {
+            moveInput = Input.GetAxisRaw("Vertical");
+            turnInput = Input.GetAxisRaw("Horizontal");
+        }
+        
     }
 
     void FixedUpdate()
