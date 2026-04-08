@@ -87,13 +87,13 @@ public class CupGameManager : MonoBehaviour
 
             if (dir != 0 && lastHorizontal == 0) // detects "press"
             {
-                if (dir > 0 && selectedCup < 3)
+                if (dir > 0 && selectedCup < 3 && cups[selectedCup].interactable)
                 {
                     cups[selectedCup].BecomeCup();
                     selectedCup += 1;
                     cups[selectedCup].BecomeTilt();
                 }
-                else if (dir < 0 && selectedCup > 0)
+                else if (dir < 0 && selectedCup > 0 && cups[selectedCup].interactable)
                 {
                     cups[selectedCup].BecomeCup();
                     selectedCup -= 1;
@@ -196,6 +196,7 @@ public class CupGameManager : MonoBehaviour
     private IEnumerator ShuffleRoutine()
     {
         yield return new WaitForSeconds(2f);
+        
 
         cupWithBall.PlaceBall(ball);
 
@@ -271,7 +272,7 @@ public class CupGameManager : MonoBehaviour
 
     IEnumerator GameStartDelay()
     {
-
+        PlaceBallUnderRandomCup();
         yield return new WaitForSeconds(3f);
 
         openingText.SetTrigger("Out");
@@ -291,7 +292,6 @@ public class CupGameManager : MonoBehaviour
         }
 
         ApplyDifficulty();
-        PlaceBallUnderRandomCup();
         StartCoroutine(ShuffleRoutine());
     }
 

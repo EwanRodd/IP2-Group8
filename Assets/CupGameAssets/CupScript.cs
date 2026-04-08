@@ -5,7 +5,7 @@ public class Cup : MonoBehaviour
 {
     public float moveDistance = 2f;
     private float moveSpeed = 3f;
-    private bool interactable = false;
+    public bool interactable = false;
 
     public SpriteRenderer spriteRenderer;
     public Sprite cupNormal;
