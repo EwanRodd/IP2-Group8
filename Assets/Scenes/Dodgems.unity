@@ -581,6 +581,7 @@ GameObject:
   - component: {fileID: 714224052}
   - component: {fileID: 714224055}
   - component: {fileID: 714224050}
+  - component: {fileID: 714224056}
   m_Layer: 0
   m_Name: PlayerDodgem
   m_TagString: Player
@@ -736,8 +737,30 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 5.5, y: 8}
+  m_Size: {x: 5.58, y: 8.56}
   m_Direction: 0
+--- !u!95 &714224056
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714224049}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fba6bc4a89e4f704eb94b253f732bf33, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &886804173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,11 +1563,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2710892203365154790, guid: f6b0ae4e4feb6f649b93d86deb898187, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.43
+      value: 4.73
       objectReference: {fileID: 0}
     - target: {fileID: 2710892203365154790, guid: f6b0ae4e4feb6f649b93d86deb898187, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.19
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 2710892203365154790, guid: f6b0ae4e4feb6f649b93d86deb898187, type: 3}
       propertyPath: m_LocalPosition.z

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5653137573892613900}
   - component: {fileID: 780629769616633074}
   - component: {fileID: 7667827232019909612}
+  - component: {fileID: 2929386518057875827}
   m_Layer: 0
   m_Name: EnemyDodgem
   m_TagString: Enemy
@@ -172,3 +173,25 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 6.2999997, y: 9.03}
   m_Direction: 0
+--- !u!95 &2929386518057875827
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3377108923453684543}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d2d411898d08bf4986118e9d53f6c73, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
