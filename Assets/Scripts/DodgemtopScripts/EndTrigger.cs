@@ -10,7 +10,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            gameManager.WinGame();
+            StartCoroutine(gameManager.WinGame());
         }
        
     }
