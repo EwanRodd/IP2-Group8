@@ -8,6 +8,7 @@ public class Token : MonoBehaviour
     public Vector2 maxBounds;
     public float minDistance = 2f;
     public Manager manager;
+    public AudioClip pickupSound;
 
     private void Start()
     {
@@ -35,6 +36,9 @@ public class Token : MonoBehaviour
             manager.AddScore(1);
             MoveNewTarget();
             transform.position = target;
+
+            // Play sound at coin position
+            //AudioSource.PlayClipAtPoint(pickupSound, transform.position);
         }        
     }
 }

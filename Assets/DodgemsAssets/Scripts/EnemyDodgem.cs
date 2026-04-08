@@ -16,6 +16,8 @@ public class EnemyDodgem : MonoBehaviour
 
     public Manager manager;
 
+    public AudioClip bumpSound;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
