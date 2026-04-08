@@ -19,7 +19,11 @@ public class Cup : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(GoDown());
+        if (gameManager.started == true)
+        {
+            StartCoroutine(GoDown());
+        }
+        
     }
     private IEnumerator GoDown()
     {

@@ -6,7 +6,8 @@ public class EnemeyMovement : MonoBehaviour
 {
     public float moveSpeed;
     public float vertPosition;
-    
+
+    public GameManager manager;
 
     void Start()
     {
@@ -15,8 +16,12 @@ public class EnemeyMovement : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
-        transform.position = new Vector3(transform.position.x, transform.position.y - vertPosition, transform.position.z);
+        if (manager.gameHasEnded == false)
+        {
+            transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, transform.position.y - vertPosition, transform.position.z);
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

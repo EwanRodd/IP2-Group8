@@ -28,7 +28,6 @@ public class FollowGameMovement : MonoBehaviour
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
 
-    public TMP_Text introText;
     public Animator openingText;
     public Animator introCurtain;
     public Animator woodenSign;
@@ -38,6 +37,9 @@ public class FollowGameMovement : MonoBehaviour
     [SerializeField]
     private FloatSO scoreSO;
 
+    [SerializeField]
+    private FloatSO FailSO;
+
 
     public bool gameDone = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,7 +48,6 @@ public class FollowGameMovement : MonoBehaviour
         winTimerActive = true;
         winTimer = 10f;
         warning.gameObject.SetActive(false);
-        introText.gameObject.SetActive(false);
 
         StartCoroutine(GameStartDelay());
     }
@@ -127,7 +128,6 @@ public class FollowGameMovement : MonoBehaviour
     //Delay before the game starts
     IEnumerator GameStartDelay()
     {
-        introText.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(2f);
 
@@ -149,8 +149,6 @@ public class FollowGameMovement : MonoBehaviour
 
         yield return new WaitForSeconds(2.8f);
 
-        introText.gameObject.SetActive(false);
-
         gameStarted = true;
     }
 
@@ -158,6 +156,7 @@ public class FollowGameMovement : MonoBehaviour
     void PlayerFailed()
     {
         SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
+        FailSO.Value++;
         gameDone = true;
         StartCoroutine(EndGame());
     }

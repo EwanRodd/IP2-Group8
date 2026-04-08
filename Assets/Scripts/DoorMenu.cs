@@ -6,13 +6,12 @@ using TMPro;
 
 public class DoorMenu : MonoBehaviour
 {
-    static List<int> Games = new List<int> {5,8,};
-    static List<int> originalGames = new List<int> { 5, 8,};
+    static List<int> Games = new List<int> {5,7,8,10};
+    static List<int> originalGames = new List<int> { 5, 7, 8, 10};
 
     public Animator wheel;
     public Animator introCurtain;
 
-    public TMP_Text score;
     [SerializeField]
     private FloatSO scoreSO;
 
@@ -21,12 +20,12 @@ public class DoorMenu : MonoBehaviour
         wheel.ResetTrigger("CupGame");
         wheel.ResetTrigger("CopyGame");
         wheel.ResetTrigger("FollowGame");
+        wheel.ResetTrigger("TokenGame");
 
         DontDestroyOnLoad(gameObject);
 
         StartCoroutine(CurtainDelay());
 
-        score.text = "Score: " + scoreSO.Value;
     }
     public void NextGame()
     {
@@ -48,6 +47,10 @@ public class DoorMenu : MonoBehaviour
         else if (nextLevel == 7)
         {
             StartCoroutine(CupGame());
+        }
+        else if (nextLevel == 10)
+        {
+            StartCoroutine(TokenGame());
         }
     }
 
@@ -125,6 +128,19 @@ public class DoorMenu : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
 
         SceneManager.LoadScene(7);
+    }
+
+    IEnumerator TokenGame()
+    {
+        wheel.SetTrigger("TokenGame");
+        yield return new WaitForSeconds(5f);
+
+        introCurtain.ResetTrigger("Starting");
+        introCurtain.SetTrigger("Ending");
+
+        yield return new WaitForSeconds(3.5f);
+
+        SceneManager.LoadScene(10);
     }
 
     void EndGame()

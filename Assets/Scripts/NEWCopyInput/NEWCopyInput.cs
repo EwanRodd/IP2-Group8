@@ -85,6 +85,9 @@ public class NEWCopyInput : MonoBehaviour
     [SerializeField]
     private FloatSO scoreSO;
 
+    [SerializeField]
+    private FloatSO FailSO;
+
     void Start()
     {
         timeUpText.gameObject.SetActive(false);
@@ -123,6 +126,8 @@ public class NEWCopyInput : MonoBehaviour
                 if (explosion != null)
                     Instantiate(explosion, ExplosionSpawn.position, ExplosionSpawn.rotation);
                 SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
+
+                FailSO.Value++;
 
                 //End the game
                 StartCoroutine(EndGame());
@@ -300,7 +305,7 @@ public class NEWCopyInput : MonoBehaviour
 
             SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
 
-
+            FailSO.Value++;
             //End the game
             StartCoroutine(EndGame());
         }

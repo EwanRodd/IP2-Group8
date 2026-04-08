@@ -1,5 +1,7 @@
-using UnityEngine;
+using System.Collections;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
@@ -11,8 +13,31 @@ public class Manager : MonoBehaviour
 
     public float elapsedTime = 0f;
     public GameObject token;
-    public string gameState = "active";
+    public string gameState = "over";
 
+    public Animator introCurtain;
+    public Transform[] confettiSpawns;
+    public GameObject confettiOne;
+    public GameObject confettiTwo;
+
+    [SerializeField] private AudioClip crowdCheer;
+    [SerializeField] private AudioClip crowdBoo;
+    [SerializeField] private AudioClip pop;
+
+    public Animator openingText;
+
+    [SerializeField]
+    private FloatSO scoreSO;
+
+    [SerializeField]
+    private FloatSO FailSO;
+
+
+    void Start()
+    {
+        StartCoroutine(GameStartDelay());
+        UpdateText();
+    }
     void Update()
     {
         elapsedTime += Time.deltaTime;
@@ -30,29 +55,69 @@ public class Manager : MonoBehaviour
 
         if (maxTimer <= 0)
         {
-            LoseGame();
+            StartCoroutine(LoseGame());
         }
     }
 
-    public void LoseGame()
+    public IEnumerator LoseGame()
     {
         gameState = "over";
         Debug.Log("loser");
         token.SetActive(false);
 
-        //EWAN THIS IS FOR YOU
-        //this is the lose state put the lose screen and transition here
+        SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
+
+        yield return new WaitForSeconds(2.8f);
+
+        introCurtain.SetTrigger("Ending");
+        introCurtain.ResetTrigger("Starting");
+
+        yield return new WaitForSeconds(4f);
+        FailSO.Value++;
+
+        SceneManager.LoadScene(2);
 
     }
 
-    public void WinGame()
+    public IEnumerator WinGame()
     {
         gameState = "over";
         Debug.Log("winner");
         token.SetActive(false);
 
-        //this is the win state put the win screen and transition here
+        Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
+        Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
+        SFXManager.instance.PopClip(pop, transform, 0.5f);
+        SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
+
+        yield return new WaitForSeconds(2.8f);
+
+        introCurtain.SetTrigger("Ending");
+        introCurtain.ResetTrigger("Starting");
+
+        yield return new WaitForSeconds(4f);
+
+        scoreSO.Value++;
+        SceneManager.LoadScene(2);
+
+    }
+
+    IEnumerator GameStartDelay()
+    {
+
+        yield return new WaitForSeconds(3f);
+
+        openingText.SetTrigger("Out");
+
+        yield return new WaitForSeconds(1f);
+
+        introCurtain.SetTrigger("Starting");
+        introCurtain.ResetTrigger("Ending");
+
+        yield return new WaitForSeconds(2.8f);
+
+        gameState = "active";
     }
 
     public void AddScore(int addedScore)
@@ -62,7 +127,7 @@ public class Manager : MonoBehaviour
 
         if (score >= maxScore)
         {
-            WinGame();
+            StartCoroutine(WinGame());
         }
     }
     public void UpdateText()
@@ -70,8 +135,4 @@ public class Manager : MonoBehaviour
         scoreText.text = (score + "/" + maxScore);
     }
 
-    private void Start()
-    {
-        UpdateText();
-    }
 }

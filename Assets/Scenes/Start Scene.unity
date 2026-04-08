@@ -263,8 +263,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelLoader: {fileID: 1707372680}
+  FirstButton: {fileID: 1331085236}
   introCurtains: {fileID: 486982433}
   scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
+  FailSO: {fileID: 11400000, guid: fe85493ca10017b4d834a9dcb0fbbb41, type: 2}
 --- !u!1 &224711472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,7 +1012,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 0.76862746, g: 0.29803923, b: 0.9372549, a: 0.31764707}
     m_PressedColor: {r: 0.6313726, g: 0.078431375, b: 0.8235294, a: 0.5176471}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9372549, g: 0.2980392, b: 0.3553953, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1254,7 +1256,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 0.76862746, g: 0.29803923, b: 0.9372549, a: 0.31764707}
     m_PressedColor: {r: 0.6313726, g: 0.078431375, b: 0.8235294, a: 0.5176471}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9372549, g: 0.29803923, b: 0.35686275, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1626,7 +1628,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
     m_HighlightedColor: {r: 0.7697456, g: 0.2980392, b: 0.9372549, a: 0.31764707}
     m_PressedColor: {r: 0.63156635, g: 0.07843137, b: 0.8235294, a: 0.5686275}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.9372549, g: 0.29803923, b: 0.35686275, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -2457,9 +2459,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dfc2f5b65bcbc24fa6efbc87e3da571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelLoader: {fileID: 0}
-  introCurtains: {fileID: 0}
-  scoreSO: {fileID: 0}
+  LevelLoader: {fileID: 1707372680}
+  FirstButton: {fileID: 1331085236}
+  introCurtains: {fileID: 486982433}
+  scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
+  FailSO: {fileID: 0}
 --- !u!1 &2097987359
 GameObject:
   m_ObjectHideFlags: 0
@@ -2670,7 +2674,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &2108299538
 RectTransform:

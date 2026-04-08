@@ -10,15 +10,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            gameManager.WinGame();
+            StartCoroutine(gameManager.WinGame());
         }
        
     }
 
     void Update()
     {
-        transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
-        transform.position = new Vector3(transform.position.x, transform.position.y - vertPosition, transform.position.z);
+        if (gameManager.gameHasEnded == false)
+        {
+            transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, transform.position.y - vertPosition, transform.position.z);
+        }
     }
 }
   

@@ -47,8 +47,18 @@ public class CupGameManager : MonoBehaviour
 
     private int selectedCup = 0;
     public bool selecting = false;
+    public Animator introCurtain;
+
+    public bool started = false;
+    public Animator openingText;
 
     private Cup cupWithBall;
+
+    [SerializeField]
+    private FloatSO FailSO;
+
+    [SerializeField]
+    private FloatSO scoreSO;
     public enum Difficulty
     {
         Easy,
@@ -58,9 +68,14 @@ public class CupGameManager : MonoBehaviour
 
     private void Start()
     {
-        ApplyDifficulty();
-        PlaceBallUnderRandomCup();
-        StartCoroutine(ShuffleRoutine());
+        StartCoroutine(GameStartDelay());
+
+        if (started == true)
+        {
+            
+        }
+        
+
     }
 
     private float lastHorizontal = 0f;
@@ -140,6 +155,8 @@ public class CupGameManager : MonoBehaviour
 
             SFXManager.instance.PopClip(pop, transform, 0.5f);
             SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
+
+            scoreSO.Value++;
             StartCoroutine(EndGame());
         }
         else
@@ -147,6 +164,7 @@ public class CupGameManager : MonoBehaviour
             failText.SetActive(true);
             SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
 
+            FailSO.Value++;
             StartCoroutine(EndGame());
         }
 
@@ -251,9 +269,40 @@ public class CupGameManager : MonoBehaviour
         cupB.transform.position = startA;
     }
 
+    IEnumerator GameStartDelay()
+    {
+
+        yield return new WaitForSeconds(3f);
+
+        openingText.SetTrigger("Out");
+
+        yield return new WaitForSeconds(1f);
+
+        introCurtain.SetTrigger("Starting");
+        introCurtain.ResetTrigger("Ending");
+
+        yield return new WaitForSeconds(3f);
+
+        started = true;
+
+        foreach (Cup cup in cups)
+        {
+            cup.MoveVertical(-cup.moveDistance);
+        }
+
+        ApplyDifficulty();
+        PlaceBallUnderRandomCup();
+        StartCoroutine(ShuffleRoutine());
+    }
+
     IEnumerator EndGame()
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(2.8f);
+
+        introCurtain.SetTrigger("Ending");
+        introCurtain.ResetTrigger("Starting");
+
+        yield return new WaitForSeconds(4f);
 
         SceneManager.LoadScene(2);
     }
