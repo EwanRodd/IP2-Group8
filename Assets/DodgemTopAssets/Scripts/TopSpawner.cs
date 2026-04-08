@@ -19,9 +19,13 @@ public class TopSpawner : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(waitabit(6.8f));
+    }
+    IEnumerator waitabit(float fwah)
+    {
+        yield return new WaitForSeconds(fwah);
         StartCoroutine(SpawnWaves());
     }
-
     IEnumerator SpawnWaves()
     {
         for (int i = 0; i < columnCount; i++)

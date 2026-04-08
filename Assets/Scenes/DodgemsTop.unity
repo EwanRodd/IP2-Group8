@@ -1997,7 +1997,7 @@ MonoBehaviour:
   openingText: {fileID: 45173005}
   scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
   FailSO: {fileID: 11400000, guid: fe85493ca10017b4d834a9dcb0fbbb41, type: 2}
-  maxTimer: 20
+  maxTimer: 26.8
   elapsedTime: 0
   gameState: active
   livesUI:
