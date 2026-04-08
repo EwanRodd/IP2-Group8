@@ -31,6 +31,9 @@ public class StackerGameMovement : MonoBehaviour
 
     private int delay = 3;
 
+    public float maxTimer;
+    public float elapsedTime = 0f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

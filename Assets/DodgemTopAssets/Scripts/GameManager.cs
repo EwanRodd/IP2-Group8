@@ -3,13 +3,17 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
+using System.Threading;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public bool gameHasEnded = true;
+    public float lives = 3;
 
     public float endDelay = 1f;
-    public PlayerLives playerLives;
+    public DodgemPlayer DodgemPlayer;
 
     public GameObject WinLevelUI;
     public GameObject LoseLevelUI;
@@ -31,6 +35,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private FloatSO FailSO;
 
+    public float maxTimer;
+    public float elapsedTime = 0f;
+    public string gameState = "active";
+
+    public Image[] livesUI;
+
     public void Start()
      {
         StartCoroutine(GameStartDelay());
@@ -38,12 +48,44 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        if(playerLives.lives == 0)
+        if(lives == 0)
         {
+            gameState = "over";
             StartCoroutine(LoseGame());
+        }
+        elapsedTime += Time.deltaTime;
+
+        //int minutes = Mathf.FloorToInt(elapsedTime / 60f);
+        int seconds = Mathf.FloorToInt(elapsedTime);
+
+        if (gameState == "active")
+        {
+            maxTimer -= Time.deltaTime;
+            maxTimer = Mathf.Max(maxTimer, 0);
+
+        }
+
+        if (maxTimer <= 0)
+        {
+            gameState = "over";
+            StartCoroutine(WinGame());
         }
     }
 
+    public void UpdateLives()
+    {
+        for (int i = 0; i < livesUI.Length; i++)
+        {
+            if (i < lives)
+            {
+                livesUI[i].enabled = true;
+            }
+            else
+            {
+                livesUI[i].enabled = false;
+            }
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         print(collision.gameObject.name);
@@ -58,16 +100,16 @@ public class GameManager : MonoBehaviour
     IEnumerator GameStartDelay()
     {
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3f); //3
 
         openingText.SetTrigger("Out");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1); //1
 
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 
-        yield return new WaitForSeconds(2.8f);
+        yield return new WaitForSeconds(2.8f); //2.8
 
         gameHasEnded = false;
     }

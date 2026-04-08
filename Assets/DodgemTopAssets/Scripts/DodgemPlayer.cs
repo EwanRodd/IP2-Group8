@@ -1,24 +1,42 @@
+using UnityEngine;
+using System.Threading;
 using System.Collections;
 using UnityEditor.Experimental.GraphView;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerLives : MonoBehaviour
+public class DodgemPlayer : MonoBehaviour
 {
+    public float moveSpeed = 5;
+
     public int lives;
     public Image[] livesUI;
     private int delay = 3;
-    //public GameObject winText;
-    //public GameObject failText;
 
-   // public Animator introCurtain;
-
-    public GameManager gameManager;
-
-    private void Start()
+    public GameManager manager;
+    
+    
+    void Start()
     {
-      
+        
+    }
+
+
+    void Update()
+    {
+        if (manager.gameHasEnded == false)
+        {
+            float moveX = Input.GetAxis("Horizontal");
+            float moveY = Input.GetAxis("Vertical");
+
+            Vector3 movement = new Vector3(moveX, moveY, 0f);
+            transform.Translate(movement * moveSpeed * Time.deltaTime);
+        }
+        if (lives <= 0)
+        {
+            Destroy(gameObject);
+
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -39,17 +57,8 @@ public class PlayerLives : MonoBehaviour
                     livesUI[i].enabled = false;
                 }
             }
-        
-        }
-
-    }
-    void Update()
-    {
-        if (lives <= 0)
-        {
-            Destroy(gameObject);
 
         }
+
     }
 }
-

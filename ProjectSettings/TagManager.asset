@@ -9,16 +9,17 @@ TagManager:
   - Enemy
   - Cup
   - EndTrigger
+  - GameManager
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Cars
   - Water
   - UI
   - Enemy
   - PlayerBoundary
-  - 
+  - Player
   - 
   - 
   - 

@@ -468,6 +468,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BigCurtains
       objectReference: {fileID: 0}
+    - target: {fileID: 9116668605148140255, guid: 88dd2243357d87042bf7494ce2fbb341, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -884,7 +888,7 @@ Animator:
   m_GameObject: {fileID: 714224049}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fba6bc4a89e4f704eb94b253f732bf33, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7bbbf973fe40b704ca99813e862aea05, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
