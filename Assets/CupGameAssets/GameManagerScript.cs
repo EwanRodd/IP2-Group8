@@ -36,6 +36,8 @@ public class CupGameManager : MonoBehaviour
     private int delay = 3;
     private float stopSpeed;
 
+    public Animator woodenSign;
+
     [Header("Confetti")]
     public Transform[] confettiSpawns;
     public GameObject confettiOne;
@@ -273,16 +275,25 @@ public class CupGameManager : MonoBehaviour
     IEnumerator GameStartDelay()
     {
         PlaceBallUnderRandomCup();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
+
+        woodenSign.SetTrigger("In");
+
+        yield return new WaitForSeconds(1f);
 
         openingText.SetTrigger("Out");
+
+        yield return new WaitForSeconds(1f);
+
+        woodenSign.SetTrigger("Out");
+        woodenSign.ResetTrigger("In");
 
         yield return new WaitForSeconds(1f);
 
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2.8f);
 
         started = true;
 

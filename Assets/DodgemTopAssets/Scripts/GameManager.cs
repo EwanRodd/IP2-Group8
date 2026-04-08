@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using System.Threading;
-using UnityEditor.Experimental.GraphView;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     public Animator introCurtain;
     public Animator openingText;
+    public Animator woodenSign;
 
     [SerializeField]
     private FloatSO scoreSO;
@@ -100,16 +101,25 @@ public class GameManager : MonoBehaviour
     IEnumerator GameStartDelay()
     {
 
-        yield return new WaitForSeconds(3f); //3
+        yield return new WaitForSeconds(2f);
+
+        woodenSign.SetTrigger("In");
+
+        yield return new WaitForSeconds(1f);
 
         openingText.SetTrigger("Out");
 
-        yield return new WaitForSeconds(1); //1
+        yield return new WaitForSeconds(1f);
+
+        woodenSign.SetTrigger("Out");
+        woodenSign.ResetTrigger("In");
+
+        yield return new WaitForSeconds(1f);
 
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 
-        yield return new WaitForSeconds(2.8f); //2.8
+        yield return new WaitForSeconds(2.8f);
 
         gameHasEnded = false;
     }

@@ -70,6 +70,8 @@ public class NEWCopyInput : MonoBehaviour
 
     public GameObject hostPrefab;
 
+    public Animator woodenSign;
+
     [Header("Curtains")]
     public Animator Curtain;
     public Animator introCurtain;
@@ -330,15 +332,25 @@ public class NEWCopyInput : MonoBehaviour
     //Function for a delay at the start of the game
     IEnumerator GameStartDelay()
     {
+        yield return new WaitForSeconds(2f);
 
-        yield return new WaitForSeconds(3f);
+        woodenSign.SetTrigger("In");
+
+        yield return new WaitForSeconds(1f);
 
         openingText.SetTrigger("Out");
 
         yield return new WaitForSeconds(1f);
 
+        woodenSign.SetTrigger("Out");
+        woodenSign.ResetTrigger("In");
+
+        yield return new WaitForSeconds(1f);
+
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
+
+        yield return new WaitForSeconds(2.8f);
 
 
         SpawnRandomDirection();

@@ -15,6 +15,8 @@ public class Manager : MonoBehaviour
     public GameObject token;
     public string gameState = "over";
 
+    public Animator woodenSign;
+
     public Animator introCurtain;
     public Transform[] confettiSpawns;
     public GameObject confettiOne;
@@ -106,9 +108,18 @@ public class Manager : MonoBehaviour
     IEnumerator GameStartDelay()
     {
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
+
+        woodenSign.SetTrigger("In");
+
+        yield return new WaitForSeconds(1f);
 
         openingText.SetTrigger("Out");
+
+        yield return new WaitForSeconds(1f);
+
+        woodenSign.SetTrigger("Out");
+        woodenSign.ResetTrigger("In");
 
         yield return new WaitForSeconds(1f);
 
