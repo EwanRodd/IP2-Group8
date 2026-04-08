@@ -15,6 +15,9 @@ public class EndGameScreen : MonoBehaviour
 
     private float totalScore;
 
+    [SerializeField] private AudioClip drum;
+    [SerializeField] private AudioClip crowdCheer;
+
     [SerializeField]
     private FloatSO scoreSO;
 
@@ -23,6 +26,7 @@ public class EndGameScreen : MonoBehaviour
 
     public void Start()
     {
+
         totalScore = scoreSO.Value - FailSO.Value;
         StartCoroutine(CurtainDelay());
 
@@ -36,11 +40,16 @@ public class EndGameScreen : MonoBehaviour
 
     IEnumerator CurtainDelay()
     {
+        yield return new WaitForSeconds(.5f);
+
+        SFXManager.instance.DrumClip(drum, transform, 0.5f);
 
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 
         yield return new WaitForSeconds(3.5f);
+
+        SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
 
     }
     public void ReturnToMainMenu()

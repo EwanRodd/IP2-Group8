@@ -616,6 +616,8 @@ MonoBehaviour:
   score: {fileID: 983963630}
   fails: {fileID: 2122040123}
   total: {fileID: 464944835}
+  drum: {fileID: 8300000, guid: e615b71df18d94e44b81e237de2f3d1e, type: 3}
+  crowdCheer: {fileID: 8300000, guid: d73a3df7f1e1bbe47833495f936af39b, type: 3}
   scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
   FailSO: {fileID: 11400000, guid: fe85493ca10017b4d834a9dcb0fbbb41, type: 2}
 --- !u!4 &919589164
@@ -1090,6 +1092,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1483934218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1483934220}
+  - component: {fileID: 1483934219}
+  m_Layer: 0
+  m_Name: SFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1483934219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483934218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f095179ac28e434438fc6f56a92cf7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CrowdObject: {fileID: 8690614476625699726, guid: 2b30e06ffd6200043b8f603525d8de6a, type: 3}
+  BooObject: {fileID: 4299548206657055197, guid: 286e4a2bd43216d449bd0acd0972ebe6, type: 3}
+  PopObject: {fileID: 341322963768551883, guid: e5fe4840e8bc78f49ad91ccadcf568af, type: 3}
+  ClapObject: {fileID: 7449388486007651953, guid: 977cc6269c9b48e419ea1cfd23abcfc7, type: 3}
+  DrumObject: {fileID: 8735625572130324515, guid: 8f1f6f6b0691bd747bed33d9f43d925a, type: 3}
+--- !u!4 &1483934220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483934218}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3646533, y: 0.7808933, z: 928.9101}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1700973859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,6 +1478,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1343197399}
+  - {fileID: 1483934220}
   - {fileID: 284006762}
   - {fileID: 1247552314}
   - {fileID: 1051646019}

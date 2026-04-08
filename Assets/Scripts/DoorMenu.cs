@@ -12,6 +12,8 @@ public class DoorMenu : MonoBehaviour
     public Animator wheel;
     public Animator introCurtain;
 
+    [SerializeField] private AudioClip drum;
+
     [SerializeField]
     private FloatSO scoreSO;
 
@@ -33,7 +35,9 @@ public class DoorMenu : MonoBehaviour
         int nextLevelIndex = Random.Range(0, Games.Count);
 
         int nextLevel = Games[nextLevelIndex];
- 
+
+        SFXManager.instance.DrumClip(drum, transform, 0.5f);
+
         Games.Remove(nextLevel);
         // load the level:
         if (nextLevel == 5)
@@ -93,6 +97,7 @@ public class DoorMenu : MonoBehaviour
     }
     IEnumerator CopyGame()
     {
+
         wheel.SetTrigger("CopyGame");
         yield return new WaitForSeconds(5f);
 

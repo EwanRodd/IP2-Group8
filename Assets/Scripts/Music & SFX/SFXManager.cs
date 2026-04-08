@@ -9,6 +9,7 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private AudioSource BooObject;
     [SerializeField] private AudioSource PopObject;
     [SerializeField] private AudioSource ClapObject;
+    [SerializeField] private AudioSource DrumObject;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -84,5 +85,21 @@ public class SFXManager : MonoBehaviour
 
         Destroy(audioSource.gameObject, clipLength);
 
+    }
+
+    public void DrumClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    {
+        AudioSource audioSource = Instantiate(DrumObject, spawnTransform.position, Quaternion.identity);
+
+        audioSource.clip = audioClip;
+
+        audioSource.volume = volume;
+
+        audioSource.time = 0.5f;
+        audioSource.Play();
+
+        float clipLength = audioSource.clip.length;
+
+        Destroy(audioSource.gameObject, clipLength);
     }
 }
