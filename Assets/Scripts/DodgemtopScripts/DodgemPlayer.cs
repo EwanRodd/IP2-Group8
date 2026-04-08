@@ -4,6 +4,8 @@ using System.Threading;
 public class DodgemPlayer : MonoBehaviour
 {
     public float moveSpeed = 5;
+
+    public GameManager manager;
     
     
     void Start()
@@ -14,10 +16,13 @@ public class DodgemPlayer : MonoBehaviour
 
     void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveY = Input.GetAxis("Vertical");
+        if (manager.gameHasEnded == false)
+        {
+            float moveX = Input.GetAxis("Horizontal");
+            float moveY = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveX, moveY, 0f);
-        transform.Translate(movement * moveSpeed * Time.deltaTime);
+            Vector3 movement = new Vector3(moveX, moveY, 0f);
+            transform.Translate(movement * moveSpeed * Time.deltaTime);
+        }
     }
 }

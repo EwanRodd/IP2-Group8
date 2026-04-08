@@ -24,8 +24,13 @@ public class Manager : MonoBehaviour
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
 
+    public Animator openingText;
+
     [SerializeField]
     private FloatSO scoreSO;
+
+    [SerializeField]
+    private FloatSO FailSO;
 
 
     void Start()
@@ -68,6 +73,7 @@ public class Manager : MonoBehaviour
         introCurtain.ResetTrigger("Starting");
 
         yield return new WaitForSeconds(4f);
+        FailSO.Value++;
 
         SceneManager.LoadScene(2);
 
@@ -102,7 +108,7 @@ public class Manager : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        //openingText.SetTrigger("Out");
+        openingText.SetTrigger("Out");
 
         yield return new WaitForSeconds(1f);
 

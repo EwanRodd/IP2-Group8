@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,11 +9,10 @@ public class PlayerLives : MonoBehaviour
     public int lives;
     public Image[] livesUI;
     private int delay = 3;
-    public GameObject winText;
-    public GameObject failText;
+    //public GameObject winText;
+    //public GameObject failText;
 
-    public Animator Curtain;
-    public Animator introCurtain;
+   // public Animator introCurtain;
 
     public GameManager gameManager;
 
@@ -39,17 +39,16 @@ public class PlayerLives : MonoBehaviour
                     livesUI[i].enabled = false;
                 }
             }
-
+        
         }
+
     }
     void Update()
     {
         if (lives <= 0)
         {
             Destroy(gameObject);
-            Time.timeScale = 0;
 
-            gameManager.LoseGame();
         }
     }
 }

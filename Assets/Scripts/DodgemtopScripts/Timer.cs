@@ -7,18 +7,24 @@ public class Timer : MonoBehaviour
 {
     public float time; 
     public TextMeshProUGUI timerText;
+
+    public GameManager manager;
       
 
     // Update is called once per frame
     void Update()
     {
-        time -= Time.deltaTime;
-        timerText.text = Mathf.Floor(time).ToString();
-
-        if (time < 1)
+        if (manager.gameHasEnded == false)
         {
-            Time.timeScale = 0;         
+            time -= Time.deltaTime;
+            timerText.text = Mathf.Floor(time).ToString();
+
+            if (time < 1)
+            {
+
+            }
         }
+       
     }
 
    
