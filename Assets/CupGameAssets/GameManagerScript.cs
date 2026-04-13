@@ -41,7 +41,6 @@ public class CupGameManager : MonoBehaviour
     [Header("Confetti")]
     public Transform[] confettiSpawns;
     public GameObject confettiOne;
-    public GameObject confettiTwo;
 
     [SerializeField] private AudioClip crowdCheer;
     [SerializeField] private AudioClip crowdBoo;
@@ -70,6 +69,7 @@ public class CupGameManager : MonoBehaviour
 
     private void Start()
     {
+        confettiOne.SetActive(false);
         StartCoroutine(GameStartDelay());
 
         if (started == true)
@@ -148,12 +148,10 @@ public class CupGameManager : MonoBehaviour
         if (correct)
         {
             winText.SetActive(true);
+            confettiOne.SetActive(true);
 
             if (confettiOne != null)
                 Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
-
-            if (confettiTwo != null)
-                Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
             SFXManager.instance.PopClip(pop, transform, 0.5f);
             SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);

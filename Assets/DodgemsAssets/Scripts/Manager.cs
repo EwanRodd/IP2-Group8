@@ -25,6 +25,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private AudioClip crowdCheer;
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
+    [SerializeField] private AudioClip coin;
 
     public Animator openingText;
 
@@ -134,6 +135,7 @@ public class Manager : MonoBehaviour
     public void AddScore(int addedScore)
     {
         score +=1;
+        SFXManager.instance.CoinClip(coin, transform, 1f);
         UpdateText();
 
         if (score >= maxScore)

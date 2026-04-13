@@ -10,6 +10,11 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private AudioSource PopObject;
     [SerializeField] private AudioSource ClapObject;
     [SerializeField] private AudioSource DrumObject;
+    [SerializeField] private AudioSource CoinObject;
+    [SerializeField] private AudioSource BumpObject;
+    [SerializeField] private AudioSource ExplosionObject;
+    [SerializeField] private AudioSource CurtainsObject;
+    [SerializeField] private AudioSource AudienceObject;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -87,6 +92,7 @@ public class SFXManager : MonoBehaviour
 
     }
 
+    //Drum Roll sound effect
     public void DrumClip(AudioClip audioClip, Transform spawnTransform, float volume)
     {
         AudioSource audioSource = Instantiate(DrumObject, spawnTransform.position, Quaternion.identity);
@@ -101,5 +107,88 @@ public class SFXManager : MonoBehaviour
         float clipLength = audioSource.clip.length;
 
         Destroy(audioSource.gameObject, clipLength);
+    }
+
+    //Token/Coin Sound Effect
+    public void CoinClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    {
+        AudioSource audioSource = Instantiate(CoinObject, spawnTransform.position, Quaternion.identity);
+
+        audioSource.clip = audioClip;
+
+        audioSource.volume = volume;
+
+        audioSource.Play();
+
+        float clipLength = audioSource.clip.length;
+
+        Destroy(audioSource.gameObject, clipLength);
+    }
+
+    //Dodgem bump sound effect
+    public void BumpClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    {
+        AudioSource audioSource = Instantiate(BumpObject, spawnTransform.position, Quaternion.identity);
+
+        audioSource.clip = audioClip;
+
+        audioSource.volume = volume;
+
+        audioSource.time = 0.02f;
+        audioSource.Play();
+
+        float clipLength = audioSource.clip.length;
+
+        Destroy(audioSource.gameObject, clipLength);
+    }
+
+    //Dodgem explosion sound effect
+    public void ExplosionClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    {
+        AudioSource audioSource = Instantiate(ExplosionObject, spawnTransform.position, Quaternion.identity);
+
+        audioSource.clip = audioClip;
+
+        audioSource.volume = volume;
+
+        audioSource.Play();
+
+        float clipLength = audioSource.clip.length;
+
+        Destroy(audioSource.gameObject, clipLength);
+    }
+
+    //Audience murmur sound effect
+    public void AudienceClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    {
+        AudioSource audioSource = Instantiate(AudienceObject, spawnTransform.position, Quaternion.identity);
+
+        audioSource.clip = audioClip;
+
+        audioSource.volume = volume;
+
+        audioSource.Play();
+
+        float clipLength = audioSource.clip.length;
+
+        Destroy(audioSource.gameObject, clipLength);
+    }
+
+    //Curtains sound effect
+    public void CurtainClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    {
+        AudioSource audioSource = Instantiate(CurtainsObject, spawnTransform.position, Quaternion.identity);
+
+        audioSource.clip = audioClip;
+
+        audioSource.volume = volume;
+
+        audioSource.time = 2f;
+        audioSource.Play();
+
+        float clipLength = audioSource.clip.length;
+
+        Destroy(audioSource.gameObject, clipLength);
+
     }
 }

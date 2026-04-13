@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip crowdCheer;
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
+    [SerializeField] private AudioClip explosion;
 
     public Animator introCurtain;
     public Animator openingText;
@@ -153,6 +154,7 @@ public class GameManager : MonoBehaviour
         if (gameHasEnded == false)
         {
             gameHasEnded = true;
+            SFXManager.instance.ExplosionClip(explosion, transform, 0.5f);
             SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
 
             yield return new WaitForSeconds(2.8f);

@@ -1221,6 +1221,7 @@ MonoBehaviour:
   wheel: {fileID: 1232252775}
   introCurtain: {fileID: 2035659463}
   drum: {fileID: 8300000, guid: e615b71df18d94e44b81e237de2f3d1e, type: 3}
+  audience: {fileID: 8300000, guid: 05dcbbfd5eecf7b4dbf477b5224d1041, type: 3}
   scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
 --- !u!4 &1506801230
 Transform:
@@ -1271,6 +1272,11 @@ MonoBehaviour:
   PopObject: {fileID: 341322963768551883, guid: e5fe4840e8bc78f49ad91ccadcf568af, type: 3}
   ClapObject: {fileID: 7449388486007651953, guid: 977cc6269c9b48e419ea1cfd23abcfc7, type: 3}
   DrumObject: {fileID: 8735625572130324515, guid: 8f1f6f6b0691bd747bed33d9f43d925a, type: 3}
+  CoinObject: {fileID: 0}
+  BumpObject: {fileID: 0}
+  ExplosionObject: {fileID: 0}
+  CurtainsObject: {fileID: 0}
+  AudienceObject: {fileID: 728972656907401451, guid: 5746144e72fd03a46a95c1cb6b30af23, type: 3}
 --- !u!4 &1548641935
 Transform:
   m_ObjectHideFlags: 0

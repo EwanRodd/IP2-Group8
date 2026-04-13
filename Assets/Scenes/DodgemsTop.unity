@@ -1467,6 +1467,7 @@ MonoBehaviour:
   turnSpeed: 6
   moveSpeed: 4
   deadzone: 0.4
+  bump: {fileID: 8300000, guid: e667066b657e7144d98f7a320f439863, type: 3}
   manager: {fileID: 1057753001}
 --- !u!95 &838185866
 Animator:
@@ -1993,6 +1994,7 @@ MonoBehaviour:
   crowdCheer: {fileID: 8300000, guid: d73a3df7f1e1bbe47833495f936af39b, type: 3}
   crowdBoo: {fileID: 8300000, guid: 029c98ceb38bda949a468c673bd58077, type: 3}
   pop: {fileID: 8300000, guid: 212183505e17dae4ea5ab8283604594e, type: 3}
+  explosion: {fileID: 8300000, guid: 52ea953262339ce47966314c11d3f2e3, type: 3}
   introCurtain: {fileID: 1877637547}
   openingText: {fileID: 45173005}
   woodenSign: {fileID: 1944657618}
@@ -2984,6 +2986,11 @@ MonoBehaviour:
   PopObject: {fileID: 341322963768551883, guid: e5fe4840e8bc78f49ad91ccadcf568af, type: 3}
   ClapObject: {fileID: 7449388486007651953, guid: 977cc6269c9b48e419ea1cfd23abcfc7, type: 3}
   DrumObject: {fileID: 0}
+  CoinObject: {fileID: 0}
+  BumpObject: {fileID: 7077396002248972985, guid: dc99846d1537c5a47b449557695ffdfd, type: 3}
+  ExplosionObject: {fileID: 5776031655848268196, guid: a9ceabf9173c0a7448cd3b16c45501d2, type: 3}
+  CurtainsObject: {fileID: 0}
+  AudienceObject: {fileID: 0}
 --- !u!4 &1595018109
 Transform:
   m_ObjectHideFlags: 0

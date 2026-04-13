@@ -12,6 +12,8 @@ public class PlayerDodgem : MonoBehaviour
 
     Rigidbody2D rb;
 
+    [SerializeField] private AudioClip bump;
+
     public Manager manager;
 
     void Start()
@@ -45,6 +47,7 @@ public class PlayerDodgem : MonoBehaviour
             lives--;
 
             Vector2 away = (transform.position - collision.transform.position).normalized;
+            SFXManager.instance.BumpClip(bump, transform, 1f);
             rb.AddForce(away * pushbackForce, ForceMode2D.Impulse); //dodgems bump off each other
         }
     }

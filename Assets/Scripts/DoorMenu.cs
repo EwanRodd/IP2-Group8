@@ -13,12 +13,13 @@ public class DoorMenu : MonoBehaviour
     public Animator introCurtain;
 
     [SerializeField] private AudioClip drum;
+    [SerializeField] private AudioClip audience;
 
     [SerializeField]
     private FloatSO scoreSO;
 
     public void Start()
-    {       
+    {        
         wheel.ResetTrigger("CupGame");
         wheel.ResetTrigger("CopyGame");
         wheel.ResetTrigger("FollowGame");
@@ -70,9 +71,12 @@ public class DoorMenu : MonoBehaviour
             EndGame();
         }
 
+        yield return new WaitForSeconds(0.1f);
+        SFXManager.instance.AudienceClip(audience, transform, 0.4f);
+
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
-
+        
         yield return new WaitForSeconds(3.5f);
 
         NextGame();

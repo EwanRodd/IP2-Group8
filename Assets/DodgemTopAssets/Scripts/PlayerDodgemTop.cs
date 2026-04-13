@@ -15,6 +15,8 @@ public class PlayerDodgemTop : MonoBehaviour
     private Vector2 movement;
     private Vector2 lastDirection = Vector2.right; // default facing
 
+    [SerializeField] private AudioClip bump;
+
     public GameManager manager;
 
     void Start()
@@ -58,8 +60,10 @@ public class PlayerDodgemTop : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            SFXManager.instance.BumpClip(bump, transform, 1f);
             Debug.Log("Player hit");
             lives--;
+            
         }
     }
 }

@@ -350,6 +350,8 @@ public class NEWCopyInput : MonoBehaviour
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 
+        theHostSpawn = Instantiate(idleHost, hostSpawn.position, idleHost.transform.rotation);
+
         yield return new WaitForSeconds(2.8f);
 
 
