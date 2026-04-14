@@ -20,6 +20,7 @@ public class Manager : MonoBehaviour
     public Animator introCurtain;
     public Transform[] confettiSpawns;
     public GameObject confettiOne;
+    public GameObject confettiTwo;
 
     [SerializeField] private AudioClip crowdCheer;
     [SerializeField] private AudioClip crowdBoo;
@@ -90,6 +91,7 @@ public class Manager : MonoBehaviour
         token.SetActive(false);
 
         Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
+        Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
         SFXManager.instance.PopClip(pop, transform, 0.5f);
         SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);

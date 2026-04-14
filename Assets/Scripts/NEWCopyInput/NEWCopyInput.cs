@@ -41,6 +41,7 @@ public class NEWCopyInput : MonoBehaviour
 
     [Header("Feedback")]
     public GameObject confettiOne;
+    public GameObject confettiTwo;
     public GameObject explosion;    
 
     [Header("UI")]
@@ -270,6 +271,7 @@ public class NEWCopyInput : MonoBehaviour
                 if (currentRound >= totalRounds)
                 {
                     Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
+                    Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
                     SFXManager.instance.PopClip(pop, transform, 0.5f);
                     SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);

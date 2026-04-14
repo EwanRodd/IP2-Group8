@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     public Transform[] confettiSpawns;
     public GameObject confettiOne;
+    public GameObject confettiTwo;
 
     [SerializeField] private AudioClip crowdCheer;
     [SerializeField] private AudioClip crowdBoo;
@@ -132,6 +133,7 @@ public class GameManager : MonoBehaviour
             gameHasEnded = true;
             Debug.Log("Game Over");
             Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
+            Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
             SFXManager.instance.PopClip(pop, transform, 0.5f);
             SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
