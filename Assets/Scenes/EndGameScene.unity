@@ -747,6 +747,7 @@ MonoBehaviour:
   total: {fileID: 464944835}
   drum: {fileID: 8300000, guid: e615b71df18d94e44b81e237de2f3d1e, type: 3}
   crowdCheer: {fileID: 8300000, guid: d73a3df7f1e1bbe47833495f936af39b, type: 3}
+  curtains: {fileID: 8300000, guid: 2feb4b916f0281640808fd0d5706feda, type: 3}
   scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
   FailSO: {fileID: 11400000, guid: fe85493ca10017b4d834a9dcb0fbbb41, type: 2}
 --- !u!4 &919589164
@@ -1258,7 +1259,7 @@ MonoBehaviour:
   CoinObject: {fileID: 0}
   BumpObject: {fileID: 0}
   ExplosionObject: {fileID: 0}
-  CurtainsObject: {fileID: 0}
+  CurtainsObject: {fileID: 3052911085408857104, guid: 31a728746ffd72047b7083a87e6afa32, type: 3}
   AudienceObject: {fileID: 0}
 --- !u!4 &1483934220
 Transform:

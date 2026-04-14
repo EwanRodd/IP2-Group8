@@ -14,6 +14,7 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private AudioSource BumpObject;
     [SerializeField] private AudioSource ExplosionObject;
     [SerializeField] private AudioSource CurtainsObject;
+    [SerializeField] private AudioSource CurtainDropObject;
     [SerializeField] private AudioSource AudienceObject;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -183,7 +184,24 @@ public class SFXManager : MonoBehaviour
 
         audioSource.volume = volume;
 
-        audioSource.time = 2f;
+        audioSource.time = 6f;
+        audioSource.Play();
+
+        float clipLength = audioSource.clip.length;
+
+        Destroy(audioSource.gameObject, clipLength);
+
+    }
+
+    public void CurtainDropClip(AudioClip audioClip, Transform spawnTransform, float volume)
+    {
+        AudioSource audioSource = Instantiate(CurtainDropObject, spawnTransform.position, Quaternion.identity);
+
+        audioSource.clip = audioClip;
+
+        audioSource.volume = volume;
+
+        audioSource.time = 0.3f;
         audioSource.Play();
 
         float clipLength = audioSource.clip.length;

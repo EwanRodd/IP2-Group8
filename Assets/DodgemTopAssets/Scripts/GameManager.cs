@@ -20,12 +20,12 @@ public class GameManager : MonoBehaviour
 
     public Transform[] confettiSpawns;
     public GameObject confettiOne;
-    public GameObject confettiTwo;
 
     [SerializeField] private AudioClip crowdCheer;
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
     [SerializeField] private AudioClip explosion;
+    [SerializeField] private AudioClip curtains;
 
     public Animator introCurtain;
     public Animator openingText;
@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 
@@ -131,13 +132,13 @@ public class GameManager : MonoBehaviour
             gameHasEnded = true;
             Debug.Log("Game Over");
             Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
-            Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
             SFXManager.instance.PopClip(pop, transform, 0.5f);
             SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
 
             yield return new WaitForSeconds(2.8f);
 
+            SFXManager.instance.CurtainClip(curtains, transform, 1f);
             introCurtain.SetTrigger("Ending");
             introCurtain.ResetTrigger("Starting");
 
@@ -158,6 +159,8 @@ public class GameManager : MonoBehaviour
             SFXManager.instance.CrowdBooClip(crowdBoo, transform, 0.5f);
 
             yield return new WaitForSeconds(2.8f);
+
+            SFXManager.instance.CurtainClip(curtains, transform, 1f);
 
             introCurtain.SetTrigger("Ending");
             introCurtain.ResetTrigger("Starting");

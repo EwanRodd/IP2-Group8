@@ -14,6 +14,7 @@ public class DoorMenu : MonoBehaviour
 
     [SerializeField] private AudioClip drum;
     [SerializeField] private AudioClip audience;
+    [SerializeField] private AudioClip curtains;
 
     [SerializeField]
     private FloatSO scoreSO;
@@ -73,7 +74,7 @@ public class DoorMenu : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
         SFXManager.instance.AudienceClip(audience, transform, 0.4f);
-
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
         
@@ -111,6 +112,7 @@ public class DoorMenu : MonoBehaviour
         wheel.SetTrigger("DodgemGame");
         yield return new WaitForSeconds(5f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.ResetTrigger("Starting");
         introCurtain.SetTrigger("Ending");
 
@@ -124,6 +126,7 @@ public class DoorMenu : MonoBehaviour
         wheel.SetTrigger("CopyGame");
         yield return new WaitForSeconds(5f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.ResetTrigger("Starting");
         introCurtain.SetTrigger("Ending");
 
@@ -137,6 +140,7 @@ public class DoorMenu : MonoBehaviour
         wheel.SetTrigger("FollowGame");
         yield return new WaitForSeconds(5f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.ResetTrigger("Starting");
         introCurtain.SetTrigger("Ending");
 
@@ -150,6 +154,7 @@ public class DoorMenu : MonoBehaviour
         wheel.SetTrigger("CupGame");
         yield return new WaitForSeconds(5f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.ResetTrigger("Starting");
         introCurtain.SetTrigger("Ending");
 
@@ -163,6 +168,7 @@ public class DoorMenu : MonoBehaviour
         wheel.SetTrigger("TokenGame");
         yield return new WaitForSeconds(5f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.ResetTrigger("Starting");
         introCurtain.SetTrigger("Ending");
 

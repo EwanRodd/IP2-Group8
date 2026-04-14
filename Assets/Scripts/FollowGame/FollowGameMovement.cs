@@ -18,15 +18,15 @@ public class FollowGameMovement : MonoBehaviour
     float timer;
     public float winTimer = 10f;
     public bool winTimerActive = false;
-    public TMP_Text warning;
+    public GameObject warning;
 
     public GameObject confettiOne;
-    public GameObject confettiTwo;
     public Transform[] confettiSpawns;
 
     [SerializeField] private AudioClip crowdCheer;
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
+    [SerializeField] private AudioClip curtains;
 
     public Animator openingText;
     public Animator introCurtain;
@@ -86,9 +86,6 @@ public class FollowGameMovement : MonoBehaviour
                 if (confettiOne != null)
                     Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
 
-                if (confettiTwo != null)
-                    Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
-
                 SFXManager.instance.PopClip(pop, transform, 0.5f);
                 SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
 
@@ -144,6 +141,8 @@ public class FollowGameMovement : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
+
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 
@@ -164,6 +163,8 @@ public class FollowGameMovement : MonoBehaviour
     IEnumerator EndGame()
     {
         yield return new WaitForSeconds(2.8f);
+
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
 
         introCurtain.SetTrigger("Ending");
         introCurtain.ResetTrigger("Starting");

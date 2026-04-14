@@ -17,6 +17,7 @@ public class EndGameScreen : MonoBehaviour
 
     [SerializeField] private AudioClip drum;
     [SerializeField] private AudioClip crowdCheer;
+    [SerializeField] private AudioClip curtains;
 
     [SerializeField]
     private FloatSO scoreSO;
@@ -41,7 +42,7 @@ public class EndGameScreen : MonoBehaviour
     IEnumerator CurtainDelay()
     {
         yield return new WaitForSeconds(.5f);
-
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         SFXManager.instance.DrumClip(drum, transform, 0.5f);
 
         introCurtain.SetTrigger("Starting");
@@ -57,8 +58,19 @@ public class EndGameScreen : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    IEnumerator StartQuitGame()
+    {
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
+        introCurtain.SetTrigger("Ending");
+        introCurtain.ResetTrigger("Starting");
+
+        yield return new WaitForSeconds(4f);
+
+        Application.Quit();
+    }
+
     public void QuitButton()
     {
-        Application.Quit();
+        StartCoroutine(StartQuitGame());
     }
 }

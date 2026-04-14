@@ -45,6 +45,7 @@ public class CupGameManager : MonoBehaviour
     [SerializeField] private AudioClip crowdCheer;
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
+    [SerializeField] private AudioClip curtains;
 
     private int selectedCup = 0;
     public bool selecting = false;
@@ -69,7 +70,6 @@ public class CupGameManager : MonoBehaviour
 
     private void Start()
     {
-        confettiOne.SetActive(false);
         StartCoroutine(GameStartDelay());
 
         if (started == true)
@@ -288,6 +288,7 @@ public class CupGameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 
@@ -308,6 +309,7 @@ public class CupGameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2.8f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.SetTrigger("Ending");
         introCurtain.ResetTrigger("Starting");
 

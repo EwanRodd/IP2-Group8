@@ -41,7 +41,6 @@ public class NEWCopyInput : MonoBehaviour
 
     [Header("Feedback")]
     public GameObject confettiOne;
-    public GameObject confettiTwo;
     public GameObject explosion;    
 
     [Header("UI")]
@@ -81,6 +80,8 @@ public class NEWCopyInput : MonoBehaviour
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
     [SerializeField] private AudioClip crowdClap;
+    [SerializeField] private AudioClip curtains;
+    [SerializeField] private AudioClip curtainDrop;
 
     private InputButtonData[] currentCorrectButton;
 
@@ -201,12 +202,13 @@ public class NEWCopyInput : MonoBehaviour
     {
 
         theHostSpawn = Instantiate(idleHost, hostSpawn.position, idleHost.transform.rotation);
-
+       
         Curtain.ResetTrigger("Open");
         Curtain.SetTrigger("Close");        
         
         yield return new WaitForSeconds(previewDuration);
 
+        SFXManager.instance.CurtainDropClip(curtainDrop, transform, 0.7f);
         Curtain.ResetTrigger("Close");
         Curtain.SetTrigger("Open");
 
@@ -268,7 +270,6 @@ public class NEWCopyInput : MonoBehaviour
                 if (currentRound >= totalRounds)
                 {
                     Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
-                    Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
                     SFXManager.instance.PopClip(pop, transform, 0.5f);
                     SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
@@ -347,6 +348,7 @@ public class NEWCopyInput : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 
@@ -363,6 +365,7 @@ public class NEWCopyInput : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
+        SFXManager.instance.CurtainDropClip(curtainDrop, transform, 0.7f);
         Curtain.ResetTrigger("Open");
         Curtain.SetTrigger("Close");
 
@@ -380,6 +383,7 @@ public class NEWCopyInput : MonoBehaviour
     {
         yield return new WaitForSeconds(2.8f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.SetTrigger("Ending");
         introCurtain.ResetTrigger("Starting");
 

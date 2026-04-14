@@ -11,6 +11,8 @@ public class MainMenu : MonoBehaviour
     public GameObject introCurtains;
     Animator introCurtain;
 
+    [SerializeField] private AudioClip curtains;
+
     [SerializeField]
     private FloatSO scoreSO;
 
@@ -37,6 +39,7 @@ public class MainMenu : MonoBehaviour
     {
         introCurtains.SetActive(true);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);   
         introCurtain.SetTrigger("Ending");
         introCurtain.ResetTrigger("Starting");
 
@@ -45,9 +48,24 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
+    IEnumerator StartQuitGame()
+    {
+        introCurtains.SetActive(true);
+
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
+        introCurtain.SetTrigger("Ending");
+        introCurtain.ResetTrigger("Starting");
+
+        yield return new WaitForSeconds(4f);
+
+        Application.Quit();
+    }
+
     public void QuitGame()
     {
-        Application.Quit();
-    } 
+        StartCoroutine(StartQuitGame());
+    }
+    
+
 
 }

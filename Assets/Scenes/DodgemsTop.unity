@@ -1175,7 +1175,7 @@ Transform:
   m_GameObject: {fileID: 325054980}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1988,13 +1988,12 @@ MonoBehaviour:
   LoseLevelUI: {fileID: 1860134930}
   confettiSpawns:
   - {fileID: 1171117431}
-  - {fileID: 1582965585}
-  confettiOne: {fileID: 5201238456452405609, guid: 6fe46ae64c217e140b116a1947cb47a7, type: 3}
-  confettiTwo: {fileID: 65527858876144430, guid: 610a9ba025d7e2f4a8cb31e86627281c, type: 3}
+  confettiOne: {fileID: 8472400244054383131, guid: 06dc027bd2e6341488d560ebd13a8544, type: 3}
   crowdCheer: {fileID: 8300000, guid: d73a3df7f1e1bbe47833495f936af39b, type: 3}
   crowdBoo: {fileID: 8300000, guid: 029c98ceb38bda949a468c673bd58077, type: 3}
   pop: {fileID: 8300000, guid: 212183505e17dae4ea5ab8283604594e, type: 3}
   explosion: {fileID: 8300000, guid: 52ea953262339ce47966314c11d3f2e3, type: 3}
+  curtains: {fileID: 8300000, guid: 2feb4b916f0281640808fd0d5706feda, type: 3}
   introCurtain: {fileID: 1877637547}
   openingText: {fileID: 45173005}
   woodenSign: {fileID: 1944657618}
@@ -2046,8 +2045,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171117430}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.66211826, y: 0.24819243, z: -0.24819243, w: 0.66211826}
-  m_LocalPosition: {x: -10.390001, y: -5.08, z: 10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2989,7 +2988,7 @@ MonoBehaviour:
   CoinObject: {fileID: 0}
   BumpObject: {fileID: 7077396002248972985, guid: dc99846d1537c5a47b449557695ffdfd, type: 3}
   ExplosionObject: {fileID: 5776031655848268196, guid: a9ceabf9173c0a7448cd3b16c45501d2, type: 3}
-  CurtainsObject: {fileID: 0}
+  CurtainsObject: {fileID: 3052911085408857104, guid: 31a728746ffd72047b7083a87e6afa32, type: 3}
   AudienceObject: {fileID: 0}
 --- !u!4 &1595018109
 Transform:

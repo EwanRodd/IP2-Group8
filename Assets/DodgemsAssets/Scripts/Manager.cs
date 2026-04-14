@@ -20,12 +20,12 @@ public class Manager : MonoBehaviour
     public Animator introCurtain;
     public Transform[] confettiSpawns;
     public GameObject confettiOne;
-    public GameObject confettiTwo;
 
     [SerializeField] private AudioClip crowdCheer;
     [SerializeField] private AudioClip crowdBoo;
     [SerializeField] private AudioClip pop;
     [SerializeField] private AudioClip coin;
+    [SerializeField] private AudioClip curtains;
 
     public Animator openingText;
 
@@ -72,6 +72,7 @@ public class Manager : MonoBehaviour
 
         yield return new WaitForSeconds(2.8f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.SetTrigger("Ending");
         introCurtain.ResetTrigger("Starting");
 
@@ -89,13 +90,13 @@ public class Manager : MonoBehaviour
         token.SetActive(false);
 
         Instantiate(confettiOne, confettiSpawns[0].position, confettiSpawns[0].rotation);
-        Instantiate(confettiTwo, confettiSpawns[1].position, confettiSpawns[1].rotation);
 
         SFXManager.instance.PopClip(pop, transform, 0.5f);
         SFXManager.instance.CrowdCheerClip(crowdCheer, transform, 0.5f);
 
         yield return new WaitForSeconds(2.8f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.SetTrigger("Ending");
         introCurtain.ResetTrigger("Starting");
 
@@ -124,6 +125,7 @@ public class Manager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        SFXManager.instance.CurtainClip(curtains, transform, 1f);
         introCurtain.SetTrigger("Starting");
         introCurtain.ResetTrigger("Ending");
 

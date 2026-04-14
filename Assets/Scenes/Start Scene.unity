@@ -265,6 +265,7 @@ MonoBehaviour:
   LevelLoader: {fileID: 1707372680}
   FirstButton: {fileID: 1331085236}
   introCurtains: {fileID: 486982433}
+  curtains: {fileID: 8300000, guid: 2feb4b916f0281640808fd0d5706feda, type: 3}
   scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
   FailSO: {fileID: 11400000, guid: fe85493ca10017b4d834a9dcb0fbbb41, type: 2}
 --- !u!1 &224711472
@@ -1879,6 +1880,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495152273}
   m_CullTransparentMesh: 1
+--- !u!1 &1554253202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1554253204}
+  - component: {fileID: 1554253203}
+  m_Layer: 0
+  m_Name: SFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1554253203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554253202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f095179ac28e434438fc6f56a92cf7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CrowdObject: {fileID: 0}
+  BooObject: {fileID: 0}
+  PopObject: {fileID: 0}
+  ClapObject: {fileID: 0}
+  DrumObject: {fileID: 0}
+  CoinObject: {fileID: 0}
+  BumpObject: {fileID: 0}
+  ExplosionObject: {fileID: 0}
+  CurtainsObject: {fileID: 3052911085408857104, guid: 31a728746ffd72047b7083a87e6afa32, type: 3}
+  AudienceObject: {fileID: 0}
+--- !u!4 &1554253204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554253202}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.683553, y: -0.06111078, z: 0.023905484}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1566055541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,6 +2517,7 @@ MonoBehaviour:
   LevelLoader: {fileID: 1707372680}
   FirstButton: {fileID: 1331085236}
   introCurtains: {fileID: 486982433}
+  curtains: {fileID: 0}
   scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
   FailSO: {fileID: 0}
 --- !u!1 &2097987359
@@ -2877,3 +2933,4 @@ SceneRoots:
   - {fileID: 1855489482}
   - {fileID: 2097987361}
   - {fileID: 1693341204}
+  - {fileID: 1554253204}

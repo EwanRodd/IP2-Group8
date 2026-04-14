@@ -956,6 +956,12 @@ MonoBehaviour:
   PopObject: {fileID: 341322963768551883, guid: e5fe4840e8bc78f49ad91ccadcf568af, type: 3}
   ClapObject: {fileID: 7449388486007651953, guid: 977cc6269c9b48e419ea1cfd23abcfc7, type: 3}
   DrumObject: {fileID: 0}
+  CoinObject: {fileID: 0}
+  BumpObject: {fileID: 0}
+  ExplosionObject: {fileID: 0}
+  CurtainsObject: {fileID: 3052911085408857104, guid: 31a728746ffd72047b7083a87e6afa32, type: 3}
+  CurtainDropObject: {fileID: 1239604133604237363, guid: 352ca152b3108104bb7f3e5766fea1df, type: 3}
+  AudienceObject: {fileID: 0}
 --- !u!4 &1114960044
 Transform:
   m_ObjectHideFlags: 0
@@ -1182,11 +1188,9 @@ MonoBehaviour:
   - {fileID: 1225916968}
   confettiSpawns:
   - {fileID: 1735575876}
-  - {fileID: 1048808609}
   ExplosionSpawn: {fileID: 1978131052}
   hostSpawn: {fileID: 702062816}
-  confettiOne: {fileID: 5201238456452405609, guid: 6fe46ae64c217e140b116a1947cb47a7, type: 3}
-  confettiTwo: {fileID: 65527858876144430, guid: 610a9ba025d7e2f4a8cb31e86627281c, type: 3}
+  confettiOne: {fileID: 8472400244054383131, guid: 06dc027bd2e6341488d560ebd13a8544, type: 3}
   explosion: {fileID: 6367676094791579949, guid: b7072b8e9d222e1419aa29dadb3680ee, type: 3}
   timeUpText: {fileID: 536080969}
   wrongText: {fileID: 1798825301}
@@ -1203,6 +1207,8 @@ MonoBehaviour:
   crowdBoo: {fileID: 8300000, guid: 029c98ceb38bda949a468c673bd58077, type: 3}
   pop: {fileID: 8300000, guid: 212183505e17dae4ea5ab8283604594e, type: 3}
   crowdClap: {fileID: 8300000, guid: 8772eb43efd60d14a9bb32dabf18d4fa, type: 3}
+  curtains: {fileID: 8300000, guid: 2feb4b916f0281640808fd0d5706feda, type: 3}
+  curtainDrop: {fileID: 8300000, guid: f2826bb4bfaa5ee4f991b6e64522dc89, type: 3}
   scoreSO: {fileID: 11400000, guid: d4894e8c6e1a50a468d16198f619f9fa, type: 2}
   FailSO: {fileID: 11400000, guid: fe85493ca10017b4d834a9dcb0fbbb41, type: 2}
 --- !u!114 &1481576439
@@ -1336,8 +1342,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735575875}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.66211826, y: 0.24819243, z: -0.24819243, w: 0.66211826}
-  m_LocalPosition: {x: -9.19, y: -4.89, z: -0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
